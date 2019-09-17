@@ -197,7 +197,7 @@ addOnClickListener(ids[])只需要将点击事件控件的id传入,并设置回�
      }
 })
 ```
-a.列表弹窗-使用XListDialog,XListDialog继承自TDialog,可以使用父类所有的方法,并且扩展列表数据展示丰富setAdapter()和item点击事件回调方法setOnAdapterItemClickListener()
+a.列表弹窗-使用XListDialog,XListDialog继承自XDialog,可以使用父类所有的方法,并且扩展列表数据展示丰富setAdapter()和item点击事件回调方法setOnAdapterItemClickListener()
 ```
 new XListDialog.Builder(getSupportFragmentManager())
         .setHeight(600)
@@ -222,7 +222,7 @@ new XListDialog.Builder(getSupportFragmentManager())
 ```
 ##### 列表弹窗
 为了方便使用:
-1. 不用传入layoutRes布局文件,TDialog内部设置了一个默认的RecyclerView布局,且RecyclerView的控件id为recycler_view,背景为#ffffff
+1. 不用传入layoutRes布局文件,XDialog内部设置了一个默认的RecyclerView布局,且RecyclerView的控件id为recycler_view,背景为#ffffff
 2. setAdapter(Adapter),设置recyclerview的adapter,为了封装Adapter的item点击事件,传入的adapter需要为TBaseAdapter的实现类
 3. setOnAdapterItemClickListener(),设置adapter的点击事件
 ```
@@ -345,6 +345,6 @@ public void shareDialog(View view) {
 ```
 #### 框架原理解析
 XDialog的实现原理主要分为三步
-1. 实例化XDialog.Builer对象builder,然后调用各种setXXX()方法设置数据,设置的数据都保存在XController.TParams实例中
-2. create()方法调用后才会实例化TDialog对象,并将XController.TParams中设置的数据传递到XDialog的属性TController对象中
+1. 实例化XDialog.Builer对象builder,然后调用各种setXXX()方法设置数据,设置的数据都保存在XController.XParams实例中
+2. create()方法调用后才会实例化XDialog对象,并将XController.TParams中设置的数据传递到XDialog的属性XController对象中
 3. show()方法调用显示弹窗
