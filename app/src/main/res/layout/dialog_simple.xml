@@ -1,4 +1,4 @@
-<androidx.constraintlayout.widget.ConstraintLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -54,4 +54,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/line1"
         app:layout_constraintTop_toTopOf="@+id/line" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -15,8 +17,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.cl.dialog.R;
 import com.cl.xdialog.XDialog;
