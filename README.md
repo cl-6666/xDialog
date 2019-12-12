@@ -24,13 +24,17 @@ Dialog使用起来其实更简单,但是Google却是推荐尽量使用DialogFrag
 }
 ```
  b.在model下build.gradle文件添加
-```
+```java
 支持Androidx
 implementation 'com.github.cl-6666:xDialog:v1.0.1'
 
+v7请使用
+implementation 'com.github.cl-6666:xDialog:v1.0.2'
+
+
 ```
 2.Activity或者Fragment中使用
-```
+```java
 
         new XDialog.Builder(getSupportFragmentManager())
                 .setLayoutRes(R.layout.dialog_click)    //设置弹窗展示的xml布局
@@ -87,7 +91,7 @@ implementation 'com.github.cl-6666:xDialog:v1.0.1'
 
 ```
 添加动画姿势
-```
+```java
 新建补间动画文件
 enter.xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -114,7 +118,7 @@ style.xml文件
 #### 使用方法解析
 TDialog的实现原理和系统Dialog原理差不多,主要使用Builder设计模式实现
 1.创建弹窗,传入xml布局文件或者传入View控件,且自己设置背景色,因为默认是透明背景色
-```
+```java
 new XDialog.Builder(getSupportFragmentManager())
         .setLayoutRes(R.layout.dialog_click)
         .setDialogView(view)
@@ -122,7 +126,7 @@ new XDialog.Builder(getSupportFragmentManager())
         .show();
 ```
 2.设置弹窗的宽高(如果不设置宽或者高,默认使用包裹内容的高度)
-```
+```java
    new XDialog.Builder(getSupportFragmentManager())
             .setLayoutRes(R.layout.dialog_click)
             .setWidth(600)  //设置弹窗固定宽度(单位:px)
@@ -133,16 +137,16 @@ new XDialog.Builder(getSupportFragmentManager())
             .show();
 ```
 3.设置弹窗展示的位置
-```
+```java
 .setGravity(Gravity.CENTER)
 其他位置有:Gravity.Bottom / Gravity.LEFT等等和设置控件位置一样
 ```
 4.设置弹窗背景色透明度(取值0-1f,0为全透明)
-```
+```java
 .setDimAmount(0.6f)
 ```
 5.设置弹窗外部是否可以点击取消(默认可点击取消),和设置弹窗是否可以取消(默认可取消),弹窗隐藏时回调方法
-```
+```java
 .setCancelableOutside(true)
 .setOnDismissListener(new DialogInterface.OnDismissListener() { //弹窗隐藏时回调方法
     @Override
@@ -152,7 +156,7 @@ new XDialog.Builder(getSupportFragmentManager())
 })
 ```
 6.当弹窗需要动态改变控件子view内容时,这里借鉴了RecyclerView.Adapter的设计思想,内部封装好一个BindViewHolder
-```
+```java
 .setOnBindViewListener(new OnBindViewListener() {
     @Override
     public void bindView(BindViewHolder bindViewHolder) {
@@ -163,7 +167,7 @@ new XDialog.Builder(getSupportFragmentManager())
 ```
 7.监听弹窗子控件的点击事件,内部也是通过BindViewHolder实现
 addOnClickListener(ids[])只需要将点击事件控件的id传入,并设置回调接口setOnViewClickListener()
-```
+```java
 .addOnClickListener(R.id.btn_right, R.id.tv_title)
 .setOnViewClickListener(new OnViewClickListener() {
     @Override
@@ -181,11 +185,11 @@ addOnClickListener(ids[])只需要将点击事件控件的id传入,并设置回�
 })
 ```
 8.设置弹窗动画
-```
+```java
 .setDialogAnimationRes(R.style.animate_dialog) 
 ```
 9.监听返回键点击事件,需配合setCancelableOutside(false)方法一起使用
-```
+```java
 .setOnKeyListener(new DialogInterface.OnKeyListener() {
     @Override
     public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
@@ -198,7 +202,7 @@ addOnClickListener(ids[])只需要将点击事件控件的id传入,并设置回�
 })
 ```
 a.列表弹窗-使用XListDialog,XListDialog继承自XDialog,可以使用父类所有的方法,并且扩展列表数据展示丰富setAdapter()和item点击事件回调方法setOnAdapterItemClickListener()
-```
+```java
 new XListDialog.Builder(getSupportFragmentManager())
         .setHeight(600)
         .setScreenWidthAspect(this, 0.8f)
@@ -225,7 +229,7 @@ new XListDialog.Builder(getSupportFragmentManager())
 1. 不用传入layoutRes布局文件,XDialog内部设置了一个默认的RecyclerView布局,且RecyclerView的控件id为recycler_view,背景为#ffffff
 2. setAdapter(Adapter),设置recyclerview的adapter,为了封装Adapter的item点击事件,传入的adapter需要为TBaseAdapter的实现类
 3. setOnAdapterItemClickListener(),设置adapter的点击事件
-```
+```java
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.recyclerview.widget.RecyclerView
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -236,7 +240,7 @@ new XListDialog.Builder(getSupportFragmentManager())
     android:orientation="vertical" />
 ```
 TBaseAdapter实现:需要使用者传入item的xml布局,和List数据
-```
+```java
 public abstract class XBaseAdapter<T> extends RecyclerView.Adapter<BindViewHolder> {
 
     private final int layoutRes;
@@ -288,7 +292,7 @@ public abstract class XBaseAdapter<T> extends RecyclerView.Adapter<BindViewHolde
 
 ```
 ##### 如果使用者需要使用自己的列表布局时,可以使用setListLayoutRes(layotuRes,LayoutManager)方法设置xml布局和布局管理器LayoutManager,切记xml布局中的RecyclerView的id必须设置为recycler_view(如效果图中的分享弹窗)
-```
+```java
 //底部分享
 public void shareDialog(View view) {
     new XListDialog.Builder(getSupportFragmentManager())
@@ -313,7 +317,7 @@ public void shareDialog(View view) {
 }
 ```
 自定义列表布局
-```
+```java
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
