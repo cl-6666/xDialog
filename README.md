@@ -319,7 +319,7 @@ public void shareDialog(View view) {
 自定义列表布局
 ```java
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -345,7 +345,7 @@ public void shareDialog(View view) {
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-</android.support.constraint.ConstraintLayout>
+</<androidx.constraintlayout.widget.ConstraintLayout>
 ```
 #### 框架原理解析
 XDialog的实现原理主要分为三步
