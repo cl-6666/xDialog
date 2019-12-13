@@ -352,3 +352,6 @@ XDialog的实现原理主要分为三步
 1. 实例化XDialog.Builer对象builder,然后调用各种setXXX()方法设置数据,设置的数据都保存在XController.XParams实例中
 2. create()方法调用后才会实例化XDialog对象,并将XController.TParams中设置的数据传递到XDialog的属性XController对象中
 3. show()方法调用显示弹窗
+
+### 博客地址  
+https://blog.csdn.net/a214024475/article/details/100926426
