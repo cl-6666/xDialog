@@ -95,7 +95,6 @@ public abstract class BaseDialogFragment extends DialogFragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         //去除Dialog默认头部
         Dialog dialog = getDialog();
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -106,6 +105,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
         if (getOnKeyListener() !=null){
             dialog.setOnKeyListener(getOnKeyListener());
         }
+        super.onViewCreated(view, savedInstanceState);
     }
 
     protected DialogInterface.OnKeyListener getOnKeyListener() {
