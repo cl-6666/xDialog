@@ -27,7 +27,7 @@ Dialog使用起来其实更简单,但是Google却是推荐尽量使用DialogFrag
  b.在model下build.gradle文件添加
 ```java
 支持Androidx
-implementation 'com.github.cl-6666:xDialog:v1.0.1'
+ implementation 'com.github.cl-6666:xDialog:v2.0.0'
 
 v7请使用
 implementation 'com.github.cl-6666:xDialog:v1.0.2'
