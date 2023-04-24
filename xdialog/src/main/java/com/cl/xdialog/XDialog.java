@@ -152,6 +152,7 @@ public class XDialog extends BaseDialogFragment {
             Log.e("TDialog", e.toString());
         }
         return this;
+
     }
 
     /*********************************************************************
