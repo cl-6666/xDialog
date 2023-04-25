@@ -1,7 +1,6 @@
-package com.cl.xdialog.listener;
+package com.cl.xdialog.listener
 
-import com.cl.xdialog.base.BindViewHolder;
-
+import com.cl.xdialog.base.BindViewHolder
 
 /**
  * 项目：xDialog
@@ -12,6 +11,6 @@ import com.cl.xdialog.base.BindViewHolder;
  * 描述：
  * 修订历史：
  */
-public interface OnBindViewListener {
-    void bindView(BindViewHolder viewHolder);
+interface OnBindViewListener {
+    fun bindView(viewHolder: BindViewHolder?)
 }

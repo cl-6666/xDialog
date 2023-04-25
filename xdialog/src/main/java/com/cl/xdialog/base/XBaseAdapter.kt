@@ -1,15 +1,11 @@
-package com.cl.xdialog.base;
+package com.cl.xdialog.base
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.annotation.LayoutRes;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.cl.xdialog.XDialog;
-
-import java.util.List;
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.recyclerview.widget.RecyclerView
+import com.cl.xdialog.XDialog
+import com.cl.xdialog.listener.OnAdapterItemClickListener
 
 /**
  * 项目：xDialog
@@ -20,51 +16,34 @@ import java.util.List;
  * 描述：
  * 修订历史：
  */
-public abstract class XBaseAdapter<T> extends RecyclerView.Adapter<BindViewHolder> {
-
-    private final int layoutRes;
-    private List<T> datas;
-    private OnAdapterItemClickListener adapterItemClickListener;
-    private XDialog dialog;
-
-    protected abstract void onBind(BindViewHolder holder, int position, T t);
-
-    public XBaseAdapter(@LayoutRes int layoutRes, List<T> datas) {
-        this.layoutRes = layoutRes;
-        this.datas = datas;
+abstract class XBaseAdapter<T>(
+    @param:LayoutRes private val layoutRes: Int,
+    private val datas: List<T>
+) : RecyclerView.Adapter<BindViewHolder>() {
+    private var adapterItemClickListener: OnAdapterItemClickListener<T>? = null
+    private var dialog: XDialog? = null
+    protected abstract fun onBind(holder: BindViewHolder?, position: Int, t: T)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindViewHolder {
+        return BindViewHolder(LayoutInflater.from(parent.context).inflate(layoutRes, parent, false))
     }
 
-    @Override
-    public BindViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new BindViewHolder(LayoutInflater.from(parent.getContext()).inflate(layoutRes, parent, false));
+    override fun onBindViewHolder(holder: BindViewHolder, position: Int) {
+        onBind(holder, position, datas[position])
+        holder.itemView.setOnClickListener {
+            adapterItemClickListener?.onItemClick(holder, position, datas[position], dialog)
+        }
+
     }
 
-    @Override
-    public void onBindViewHolder(final BindViewHolder holder, final int position) {
-        onBind(holder, position, datas.get(position));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adapterItemClickListener.onItemClick(holder, position, datas.get(position), dialog);
-            }
-        });
+    override fun getItemCount(): Int {
+        return datas.size
     }
 
-    @Override
-    public int getItemCount() {
-        return datas.size();
+    fun setTDialog(tDialog: XDialog?) {
+        dialog = tDialog
     }
 
-    public void setTDialog(XDialog tDialog) {
-        this.dialog = tDialog;
+    fun setOnAdapterItemClickListener(listener: OnAdapterItemClickListener<T>?) {
+        adapterItemClickListener = listener
     }
-
-    public interface OnAdapterItemClickListener<T> {
-        void onItemClick(BindViewHolder holder, int position, T t, XDialog tDialog);
-    }
-
-    public void setOnAdapterItemClickListener(OnAdapterItemClickListener listener) {
-        this.adapterItemClickListener = listener;
-    }
-
 }

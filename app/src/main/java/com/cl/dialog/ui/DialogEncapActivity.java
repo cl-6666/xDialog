@@ -12,6 +12,7 @@ import com.cl.xdialog.XDialog;
 import com.cl.xdialog.base.BindViewHolder;
 import com.cl.xdialog.base.XBaseAdapter;
 import com.cl.xdialog.list.XListDialog;
+import com.cl.xdialog.listener.OnAdapterItemClickListener;
 import com.cl.xdialog.listener.OnBindViewListener;
 import com.cl.xdialog.listener.OnViewClickListener;
 
@@ -80,7 +81,7 @@ public class DialogEncapActivity extends AppCompatActivity {
                 holder.setText(R.id.tv, item);
             }
         });
-        builder.setOnAdapterItemClickListener(new XBaseAdapter.OnAdapterItemClickListener() {
+        builder.setOnAdapterItemClickListener(new OnAdapterItemClickListener() {
             @Override
             public void onItemClick(BindViewHolder holder, int position, Object o, XDialog tDialog) {
                 String item = (String) o;

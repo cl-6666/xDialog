@@ -1,10 +1,8 @@
-package com.cl.xdialog.listener;
+package com.cl.xdialog.listener
 
-import android.view.View;
-
-import com.cl.xdialog.XDialog;
-import com.cl.xdialog.base.BindViewHolder;
-
+import android.view.View
+import com.cl.xdialog.XDialog
+import com.cl.xdialog.base.BindViewHolder
 
 /**
  * 项目：xDialog
@@ -15,6 +13,6 @@ import com.cl.xdialog.base.BindViewHolder;
  * 描述：
  * 修订历史：
  */
-public interface OnViewClickListener {
-    void onViewClick(BindViewHolder viewHolder, View view, XDialog xDialog);
+interface OnViewClickListener {
+    fun onViewClick(viewHolder: BindViewHolder?, view: View?, xDialog: XDialog?)
 }

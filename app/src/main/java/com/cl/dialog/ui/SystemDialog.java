@@ -3,12 +3,14 @@ package com.cl.dialog.ui;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.cl.dialog.R;
@@ -173,6 +175,7 @@ public class SystemDialog extends AppCompatActivity {
         customDialog.show();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void btnDialog8(View view) {
         View customTitle = LayoutInflater.from(this).inflate(R.layout.view_simple_text, null);
         new AlertDialog.Builder(this)

@@ -23,6 +23,7 @@ import com.cl.xdialog.XDialog;
 import com.cl.xdialog.base.BindViewHolder;
 import com.cl.xdialog.base.XBaseAdapter;
 import com.cl.xdialog.list.XListDialog;
+import com.cl.xdialog.listener.OnAdapterItemClickListener;
 import com.cl.xdialog.listener.OnBindViewListener;
 import com.cl.xdialog.listener.OnViewClickListener;
 
@@ -346,7 +347,7 @@ public class DiffentDialogActivity extends AppCompatActivity {
                         holder.setText(R.id.tv, s);
                     }
                 })
-                .setOnAdapterItemClickListener(new XBaseAdapter.OnAdapterItemClickListener<String>() {
+                .setOnAdapterItemClickListener(new OnAdapterItemClickListener<String>() {
                     @Override
                     public void onItemClick(BindViewHolder holder, int position, String s, XDialog tDialog) {
                         Toast.makeText(DiffentDialogActivity.this, "click:" + s, Toast.LENGTH_SHORT).show();
@@ -368,7 +369,7 @@ public class DiffentDialogActivity extends AppCompatActivity {
                         holder.setText(R.id.tv, s);
                     }
                 })
-                .setOnAdapterItemClickListener(new XBaseAdapter.OnAdapterItemClickListener<String>() {
+                .setOnAdapterItemClickListener(new OnAdapterItemClickListener<String>() {
                     @Override
                     public void onItemClick(BindViewHolder holder, int position, String s, XDialog tDialog) {
                         Toast.makeText(DiffentDialogActivity.this, "click:" + s, Toast.LENGTH_SHORT).show();
@@ -430,7 +431,7 @@ public class DiffentDialogActivity extends AppCompatActivity {
                         holder.setText(R.id.tv, s);
                     }
                 })
-                .setOnAdapterItemClickListener(new XBaseAdapter.OnAdapterItemClickListener<String>() {
+                .setOnAdapterItemClickListener(new OnAdapterItemClickListener<String>() {
                     @Override
                     public void onItemClick(BindViewHolder holder, int position, String item, XDialog tDialog) {
                         Toast.makeText(DiffentDialogActivity.this, item, Toast.LENGTH_SHORT).show();

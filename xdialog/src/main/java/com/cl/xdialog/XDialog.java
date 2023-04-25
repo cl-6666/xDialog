@@ -1,3 +1,6 @@
+
+
+
 package com.cl.xdialog;
 
 import android.content.Context;
@@ -11,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.cl.xdialog.adapter.TParams;
 import com.cl.xdialog.base.BaseDialogFragment;
 import com.cl.xdialog.base.BindViewHolder;
 import com.cl.xdialog.base.XController;
@@ -18,15 +22,10 @@ import com.cl.xdialog.listener.OnBindViewListener;
 import com.cl.xdialog.listener.OnViewClickListener;
 
 /**
- * 项目：xDialog
- * 版权：蒲公英公司 版权所有
- * 作者：Arry
- * 版本：1.0
- * 创建日期：2019-08-17
- * 描述：
- *  借鉴RecyclerView.Adapter的ViewHolder写法
- *  将Dialog的根布局传入,主要处理点击方法
- * 修订历史：
+ * name：cl
+ * date：2023/4/24
+ * desc：借鉴RecyclerView.Adapter的ViewHolder写法
+ *   将Dialog的根布局传入,主要处理点击方法
  */
 public class XDialog extends BaseDialogFragment {
 
@@ -103,10 +102,6 @@ public class XDialog extends BaseDialogFragment {
         return xController.getGravity();
     }
 
-    @Override
-    public float getDimAmount() {
-        return xController.getDimAmount();
-    }
 
     @Override
     public int getDialogHeight() {
@@ -152,7 +147,6 @@ public class XDialog extends BaseDialogFragment {
             Log.e("TDialog", e.toString());
         }
         return this;
-
     }
 
     /*********************************************************************
@@ -161,10 +155,10 @@ public class XDialog extends BaseDialogFragment {
      */
     public static class Builder {
 
-        XController.TParams params;
+        TParams params;
 
         public Builder(FragmentManager fragmentManager) {
-            params = new XController.TParams();
+            params = new TParams();
             params.mFragmentManager = fragmentManager;
         }
 
@@ -343,6 +337,5 @@ public class XDialog extends BaseDialogFragment {
             return dialog;
         }
     }
-
 
 }
