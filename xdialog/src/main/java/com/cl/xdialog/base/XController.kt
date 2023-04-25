@@ -20,7 +20,7 @@ import java.io.Serializable
  * 数据保存封装的容器类
  * 修订历史：
  */
-class XController<A : XBaseAdapter<*>?> : Parcelable, Serializable {
+open class XController<A : XBaseAdapter<*>?> : Parcelable, Serializable {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //get
     var fragmentManager: FragmentManager? = null

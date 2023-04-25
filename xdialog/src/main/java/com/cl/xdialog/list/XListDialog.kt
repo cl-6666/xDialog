@@ -61,19 +61,19 @@ class XListDialog : XDialog() {
         private val params = TParams<XBaseAdapter<*>>()
 
         init {
-            params?.mFragmentManager = fragmentManager
+            params.mFragmentManager = fragmentManager
         }
 
         //各种setXXX()方法设置数据
         fun setLayoutRes(@LayoutRes layoutRes: Int): Builder {
-            params?.mLayoutRes = layoutRes
+            params.mLayoutRes = layoutRes
             return this
         }
 
         //设置自定义列表布局和方向
         fun setListLayoutRes(@LayoutRes layoutRes: Int, orientation: Int): Builder {
-            params?.listLayoutRes = layoutRes
-            params?.orientation = orientation
+            params.listLayoutRes = layoutRes
+            params.orientation = orientation
             return this
         }
 
@@ -81,12 +81,12 @@ class XListDialog : XDialog() {
          * 设置弹窗宽度是屏幕宽度的比例 0 -1
          */
         fun setScreenWidthAspect(activity: Activity, widthAspect: Float): Builder {
-            params?.mWidth = (getScreenWidth(activity) * widthAspect).toInt()
+            params.mWidth = (getScreenWidth(activity) * widthAspect).toInt()
             return this
         }
 
         fun setWidth(widthPx: Int): Builder {
-            params?.mWidth = widthPx
+            params.mWidth = widthPx
             return this
         }
 
@@ -94,70 +94,70 @@ class XListDialog : XDialog() {
          * 设置屏幕高度比例 0 -1
          */
         fun setScreenHeightAspect(activity: Activity, heightAspect: Float): Builder {
-            params?.mHeight = (getScreenHeight(activity) * heightAspect).toInt()
+            params.mHeight = (getScreenHeight(activity) * heightAspect).toInt()
             return this
         }
 
         fun setHeight(heightPx: Int): Builder {
-            params?.mHeight = heightPx
+            params.mHeight = heightPx
             return this
         }
 
         fun setGravity(gravity: Int): Builder {
-            params?.mGravity = gravity
+            params.mGravity = gravity
             return this
         }
 
         fun setCancelOutside(cancel: Boolean): Builder {
-            params?.mIsCancelableOutside = cancel
+            params.mIsCancelableOutside = cancel
             return this
         }
 
         fun setDimAmount(dim: Float): Builder {
-            params?.mDimAmount = dim
+            params.mDimAmount = dim
             return this
         }
 
         fun setTag(tag: String): Builder {
-            params?.mTag = tag
+            params.mTag = tag
             return this
         }
 
         fun setOnBindViewListener(listener: OnBindViewListener?): Builder {
-            params?.bindViewListener = listener
+            params.bindViewListener = listener
             return this
         }
 
         fun addOnClickListener(vararg ids: Int): Builder {
-            params?.ids = ids
+            params.ids = ids
             return this
         }
 
         fun setOnViewClickListener(listener: OnViewClickListener?): Builder {
-            params?.mOnViewClickListener = listener
+            params.mOnViewClickListener = listener
             return this
         }
 
         //列表数据,需要传入数据和Adapter,和item点击数据
         fun <A : XBaseAdapter<*>?> setAdapter(adapter: A): Builder {
-            params?.adapter = adapter
+            params.adapter = adapter
             return this
         }
 
         fun setOnAdapterItemClickListener(listener: OnAdapterItemClickListener<*>?): Builder {
-            params?.adapterItemClickListener = listener
+            params.adapterItemClickListener = listener
             return this
         }
 
         fun setOnDismissListener(dismissListener: DialogInterface.OnDismissListener?): Builder {
-            params?.mOnDismissListener = dismissListener
+            params.mOnDismissListener = dismissListener
             return this
         }
 
         fun create(): XListDialog {
             val dialog = XListDialog()
             //将数据从Buidler的DjParams中传递到DjDialog中
-            params?.apply(dialog.xController as XController<XBaseAdapter<*>>)
+            params.apply(dialog.xController as XController<XBaseAdapter<*>>)
             return dialog
         }
     }
