@@ -35,6 +35,7 @@ class XController<A : XBaseAdapter<*>?> : Parcelable, Serializable {
     var onViewClickListener: OnViewClickListener? = null
     var onBindViewListener: OnBindViewListener? = null
 
+
     //列表
     var adapter: A? = null
         private set
