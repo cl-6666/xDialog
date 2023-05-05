@@ -70,6 +70,7 @@ class TParams<T : XBaseAdapter<*>?> {
 
     @JvmField
     var mKeyListener: DialogInterface.OnKeyListener? = null
+
     fun apply(tController: XController<T>) {
         tController.fragmentManager = mFragmentManager
         if (mLayoutRes > 0) {

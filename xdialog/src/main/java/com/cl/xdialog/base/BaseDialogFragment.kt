@@ -96,7 +96,7 @@ abstract class BaseDialogFragment : DialogFragment() {
     }
 
     protected open val onKeyListener: DialogInterface.OnKeyListener?
-        protected get() = null
+        get() = null
 
     override fun onStart() {
         super.onStart()
@@ -141,17 +141,17 @@ abstract class BaseDialogFragment : DialogFragment() {
     }
 
     protected open val isCancelableOutside: Boolean
-        protected get() = true
+        get() = true
 
     //获取弹窗显示动画,子类实现
     protected open val dialogAnimationRes: Int
-        protected get() = 0
+        get() = 0
 
     companion object {
         const val TAG = "TDialog"
 
         //默认透明度为0.2
-        val dimAmount = 0.2f
+        const val dimAmount = 0.2f
         //获取设备屏幕宽度
         @JvmStatic
         fun getScreenWidth(context: Context): Int {

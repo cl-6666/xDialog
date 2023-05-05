@@ -210,7 +210,7 @@ public class XDialog extends BaseDialogFragment {
          * 设置弹窗宽度是屏幕宽度的比例 0 -1
          */
         public Builder setScreenWidthAspect(Context context, float widthAspect) {
-            params.mWidth = (int) (getScreenWidth(context) * widthAspect);
+            params.mWidth = (int) (getScreenWidth(context.getApplicationContext()) * widthAspect);
             return this;
         }
 
@@ -218,7 +218,7 @@ public class XDialog extends BaseDialogFragment {
          * 设置弹窗高度是屏幕高度的比例 0 -1
          */
         public Builder setScreenHeightAspect(Context context, float heightAspect) {
-            params.mHeight = (int) (getScreenHeight(context) * heightAspect);
+            params.mHeight = (int) (getScreenHeight(context.getApplicationContext()) * heightAspect);
             return this;
         }
 

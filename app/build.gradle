@@ -38,4 +38,7 @@ dependencies {
 
 //    implementation 'com.github.cl-6666:xDialog:v1.0.1'
 
+    //内存泄漏检测
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
+
 }
