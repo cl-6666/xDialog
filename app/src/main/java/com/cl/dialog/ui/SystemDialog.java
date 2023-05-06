@@ -78,7 +78,6 @@ public class SystemDialog extends AppCompatActivity {
                 .create()
                 .show();
 
-
     }
 
     public void btnDialog3(View view) {
