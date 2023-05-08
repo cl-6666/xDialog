@@ -54,7 +54,6 @@ implementation 'com.github.cl-6666:xDialog:v1.0.2'
 ```
 2.Activity或者Fragment中使用
 ```java
-
         new XDialog.Builder(getSupportFragmentManager())
                 .setLayoutRes(R.layout.dialog_click)    //设置弹窗展示的xml布局
 //                .setDialogView(view)  //设置弹窗布局,直接传入View
@@ -190,11 +189,11 @@ addOnClickListener(ids[])只需要将点击事件控件的id传入,并设置回�
 .addOnClickListener(R.id.btn_right, R.id.tv_title)
 .setOnViewClickListener(new OnViewClickListener() {
     @Override
-    public void onViewClick(BindViewHolder viewHolder,View view1, TDialog tDialog) {
+    public void onViewClick(BindViewHolder viewHolder,View view1, XDialog xDialog) {
         switch (view1.getId()) {
             case R.id.btn_right:
                 Toast.makeText(DialogEncapActivity.this, "btn_right", Toast.LENGTH_SHORT).show();
-                tDialog.dismiss();
+                xDialog.dismiss();
                 break;
             case R.id.tv_title:
                 Toast.makeText(DialogEncapActivity.this, "tv_title", Toast.LENGTH_SHORT).show();
@@ -235,9 +234,9 @@ new XListDialog.Builder(getSupportFragmentManager())
         })
         .setOnAdapterItemClickListener(new TBaseAdapter.OnAdapterItemClickListener<String>() {
             @Override
-            public void onItemClick(BindViewHolder holder, int position, String s, TDialog tDialog) {
+            public void onItemClick(BindViewHolder holder, int position, String s, XDialog xDialog) {
                 Toast.makeText(DiffentDialogActivity.this, "click:" + s, Toast.LENGTH_SHORT).show();
-                tDialog.dismiss();
+                xDialog.dismiss();
             }
         })
         .create()
@@ -295,12 +294,12 @@ public abstract class XBaseAdapter<T> extends RecyclerView.Adapter<BindViewHolde
         return datas.size();
     }
 
-    public void setTDialog(XDialog tDialog) {
-        this.dialog = tDialog;
+    public void setTDialog(XDialog xDialog) {
+        this.dialog = xDialog;
     }
 
     public interface OnAdapterItemClickListener<T> {
-        void onItemClick(BindViewHolder holder, int position, T t, XDialog tDialog);
+        void onItemClick(BindViewHolder holder, int position, T t, XDialog xDialog);
     }
 
     public void setOnAdapterItemClickListener(OnAdapterItemClickListener listener) {
@@ -326,9 +325,9 @@ public void shareDialog(View view) {
             })
             .setOnAdapterItemClickListener(new TBaseAdapter.OnAdapterItemClickListener<String>() {
                 @Override
-                public void onItemClick(BindViewHolder holder, int position, String item, TDialog tDialog) {
+                public void onItemClick(BindViewHolder holder, int position, String item, XDialog xDialog) {
                     Toast.makeText(DiffentDialogActivity.this, item, Toast.LENGTH_SHORT).show();
-                    tDialog.dismiss();
+                    xDialog.dismiss();
                 }
             })
             .create()
