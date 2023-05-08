@@ -15,6 +15,22 @@ Dialog使用起来其实更简单,但是Google却是推荐尽量使用DialogFrag
 ##### 1.DialogFragment的优点
 * DialogFragment 本身是 Fragment 的子类，有着和 Fragment 基本一样的生命周期，使用 DialogFragment 来管理对话框，当旋转屏幕和按下后退键的时候可以更好的管理其生命周期
 * 在手机配置变化导致 Activity 需要重新创建时，例如旋转屏幕，基于 DialogFragment 的对话框将会由 FragmentManager 自动重建，然而基于 Dialog 实现的对话框却没有这样的能力
+
+
+版本更新历史：  
+[![](https://jitpack.io/v/cl-6666/xDialog.svg)](https://jitpack.io/#cl-6666/xDialog)  
+
+- v3.1.0：(2023年02月21日)
+  - 内部使用kotlin代码优化
+
+- v2.0.1：
+  - 解决内存泄漏问题
+  - 增加系统弹窗演示
+  - 代码优化  
+
+- v1.0.1
+  - 第一代Dialog框架提交
+
 ####使用
 1.添加依赖
  a. 在工程build.gradle文件repositories中添加
