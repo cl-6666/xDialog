@@ -20,8 +20,9 @@ Dialog使用起来其实更简单,但是Google却是推荐尽量使用DialogFrag
 版本更新历史：  
 [![](https://jitpack.io/v/cl-6666/xDialog.svg)](https://jitpack.io/#cl-6666/xDialog)  
 
-- v3.1.0：(2023年02月21日)
-  - 内部使用kotlin代码优化
+- v3.1.0：(2023年05月07日)
+  - 内部使用kotlin代码优化  
+  - 代码优化
 
 - v2.0.1：
   - 解决内存泄漏问题
