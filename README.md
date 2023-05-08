@@ -19,7 +19,7 @@ Dialog使用起来其实更简单,但是Google却是推荐尽量使用DialogFrag
 #### 效果演示  
 <img src="https://github.com/cl-6666/xDialog/blob/master/img/jies.gif" alt="演示"/>  
 
-版本更新历史：  
+版本更新历史:  
 [![](https://jitpack.io/v/cl-6666/xDialog.svg)](https://jitpack.io/#cl-6666/xDialog)  
 
 - v3.1.0：(2023年05月07日)
