@@ -1,10 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'maven-publish'
 
-
-group = 'com.github.jitpack'
-version = '3.0.6'
 
 android {
     compileSdkVersion 29
@@ -32,7 +28,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-
 }
 
 
@@ -41,18 +36,4 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            // Creates a Maven publication called "release".
-            release(MavenPublication) {
-                from components.release
-                groupId = 'com.github.jitpack'
-                artifactId = 'android-example'
-                version = '3.0.6'
-            }
-        }
-    }
 }
