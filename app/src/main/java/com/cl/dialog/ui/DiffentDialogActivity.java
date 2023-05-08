@@ -174,7 +174,7 @@ public class DiffentDialogActivity extends AppCompatActivity {
                         return false;
                     }
                 })
-                .create()   //创建TDialog
+                .create()   //创建XDialog
                 .show();    //展示
     }
 
