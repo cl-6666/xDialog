@@ -16,8 +16,10 @@ Dialog使用起来其实更简单,但是Google却是推荐尽量使用DialogFrag
 * DialogFragment 本身是 Fragment 的子类，有着和 Fragment 基本一样的生命周期，使用 DialogFragment 来管理对话框，当旋转屏幕和按下后退键的时候可以更好的管理其生命周期
 * 在手机配置变化导致 Activity 需要重新创建时，例如旋转屏幕，基于 DialogFragment 的对话框将会由 FragmentManager 自动重建，然而基于 Dialog 实现的对话框却没有这样的能力
 
+#### 效果演示  
+<img src="https://github.com/cl-6666/xDialog/blob/master/img/jies.gif" alt="演示"/>  
 
-版本更新历史：  
+版本更新历史:  
 [![](https://jitpack.io/v/cl-6666/xDialog.svg)](https://jitpack.io/#cl-6666/xDialog)  
 
 - v3.1.0：(2023年05月07日)
@@ -32,8 +34,8 @@ Dialog使用起来其实更简单,但是Google却是推荐尽量使用DialogFrag
 - v1.0.1
   - 第一代Dialog框架提交
 
-####使用
-1.添加依赖
+#### 使用
+1.添加依赖  
  a. 在工程build.gradle文件repositories中添加
 ```
   repositories {
@@ -52,7 +54,6 @@ implementation 'com.github.cl-6666:xDialog:v1.0.2'
 ```
 2.Activity或者Fragment中使用
 ```java
-
         new XDialog.Builder(getSupportFragmentManager())
                 .setLayoutRes(R.layout.dialog_click)    //设置弹窗展示的xml布局
 //                .setDialogView(view)  //设置弹窗布局,直接传入View
@@ -103,7 +104,7 @@ implementation 'com.github.cl-6666:xDialog:v1.0.2'
                         return false;
                     }
                 })
-                .create()   //创建TDialog
+                .create()   
                 .show();    //展示
 
 ```
@@ -133,7 +134,7 @@ style.xml文件
 </style>
 ```
 #### 使用方法解析
-TDialog的实现原理和系统Dialog原理差不多,主要使用Builder设计模式实现
+XDialog的实现原理和系统Dialog原理差不多,主要使用Builder设计模式实现
 1.创建弹窗,传入xml布局文件或者传入View控件,且自己设置背景色,因为默认是透明背景色
 ```java
 new XDialog.Builder(getSupportFragmentManager())
@@ -188,11 +189,11 @@ addOnClickListener(ids[])只需要将点击事件控件的id传入,并设置回�
 .addOnClickListener(R.id.btn_right, R.id.tv_title)
 .setOnViewClickListener(new OnViewClickListener() {
     @Override
-    public void onViewClick(BindViewHolder viewHolder,View view1, TDialog tDialog) {
+    public void onViewClick(BindViewHolder viewHolder,View view1, XDialog xDialog) {
         switch (view1.getId()) {
             case R.id.btn_right:
                 Toast.makeText(DialogEncapActivity.this, "btn_right", Toast.LENGTH_SHORT).show();
-                tDialog.dismiss();
+                xDialog.dismiss();
                 break;
             case R.id.tv_title:
                 Toast.makeText(DialogEncapActivity.this, "tv_title", Toast.LENGTH_SHORT).show();
@@ -233,9 +234,9 @@ new XListDialog.Builder(getSupportFragmentManager())
         })
         .setOnAdapterItemClickListener(new TBaseAdapter.OnAdapterItemClickListener<String>() {
             @Override
-            public void onItemClick(BindViewHolder holder, int position, String s, TDialog tDialog) {
+            public void onItemClick(BindViewHolder holder, int position, String s, XDialog xDialog) {
                 Toast.makeText(DiffentDialogActivity.this, "click:" + s, Toast.LENGTH_SHORT).show();
-                tDialog.dismiss();
+                xDialog.dismiss();
             }
         })
         .create()
@@ -293,12 +294,12 @@ public abstract class XBaseAdapter<T> extends RecyclerView.Adapter<BindViewHolde
         return datas.size();
     }
 
-    public void setTDialog(XDialog tDialog) {
-        this.dialog = tDialog;
+    public void setTDialog(XDialog xDialog) {
+        this.dialog = xDialog;
     }
 
     public interface OnAdapterItemClickListener<T> {
-        void onItemClick(BindViewHolder holder, int position, T t, XDialog tDialog);
+        void onItemClick(BindViewHolder holder, int position, T t, XDialog xDialog);
     }
 
     public void setOnAdapterItemClickListener(OnAdapterItemClickListener listener) {
@@ -324,9 +325,9 @@ public void shareDialog(View view) {
             })
             .setOnAdapterItemClickListener(new TBaseAdapter.OnAdapterItemClickListener<String>() {
                 @Override
-                public void onItemClick(BindViewHolder holder, int position, String item, TDialog tDialog) {
+                public void onItemClick(BindViewHolder holder, int position, String item, XDialog xDialog) {
                     Toast.makeText(DiffentDialogActivity.this, item, Toast.LENGTH_SHORT).show();
-                    tDialog.dismiss();
+                    xDialog.dismiss();
                 }
             })
             .create()
