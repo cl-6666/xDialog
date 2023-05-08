@@ -34,8 +34,8 @@ Dialog使用起来其实更简单,但是Google却是推荐尽量使用DialogFrag
 - v1.0.1
   - 第一代Dialog框架提交
 
-####使用
-1.添加依赖
+#### 使用
+1.添加依赖  
  a. 在工程build.gradle文件repositories中添加
 ```
   repositories {
@@ -135,7 +135,7 @@ style.xml文件
 </style>
 ```
 #### 使用方法解析
-TDialog的实现原理和系统Dialog原理差不多,主要使用Builder设计模式实现
+XDialog的实现原理和系统Dialog原理差不多,主要使用Builder设计模式实现
 1.创建弹窗,传入xml布局文件或者传入View控件,且自己设置背景色,因为默认是透明背景色
 ```java
 new XDialog.Builder(getSupportFragmentManager())
