@@ -105,7 +105,7 @@ implementation 'com.github.cl-6666:xDialog:v1.0.2'
                         return false;
                     }
                 })
-                .create()   //创建TDialog
+                .create()   
                 .show();    //展示
 
 ```
