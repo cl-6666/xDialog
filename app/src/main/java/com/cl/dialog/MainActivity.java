@@ -11,15 +11,24 @@ import com.cl.dialog.ui.DiffentDialogActivity;
 import com.cl.dialog.ui.NormalDFActivity;
 import com.cl.dialog.ui.SystemDialog;
 
+
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
 
+
+
+    public void diffentDialog2(View view) {
+
+
+    }
 
 
 
