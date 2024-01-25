@@ -48,8 +48,13 @@ class XListDialog : XDialog() {
         } else {
             Log.d("TDialog", "列表弹窗需要先调用setAdapter()方法!")
         }
-
     }
+
+    /**
+     * 返回getAdapter出去，方便外部调用notifyDataSetChanged()
+     */
+    val adapter: XBaseAdapter<*>?
+        get() = xController.adapter
 
 
     /*********************************************************************
