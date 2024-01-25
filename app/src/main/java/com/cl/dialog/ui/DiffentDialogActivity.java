@@ -396,7 +396,10 @@ public class DiffentDialogActivity extends AppCompatActivity {
                 .setScreenWidthAspect(this, 1.0f)
                 .setGravity(Gravity.BOTTOM)
                 .addOnClickListener(R.id.btn_evluate)
-                .setOnBindViewListener(new OnBindViewListener() {
+                .
+                setOnBindViewListener
+
+                        (new OnBindViewListener() {
                     @Override
                     public void bindView(BindViewHolder viewHolder) {
                         final EditText editText = viewHolder.getView(R.id.editText);
