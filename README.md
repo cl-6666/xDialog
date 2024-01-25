@@ -22,17 +22,13 @@ Dialog使用起来其实更简单,但是Google却是推荐尽量使用DialogFrag
 版本更新历史:  
 [![](https://jitpack.io/v/cl-6666/xDialog.svg)](https://jitpack.io/#cl-6666/xDialog)  
 
+- v3.1.3：(2024年01月25日)
+  - 解决使用XListDialog的时候，无法刷新适配器问题
+  - 代码优化
+    
 - v3.1.0：(2023年05月07日)
   - 内部使用kotlin代码优化  
   - 代码优化
-
-- v2.0.1：
-  - 解决内存泄漏问题
-  - 增加系统弹窗演示
-  - 代码优化  
-
-- v1.0.1
-  - 第一代Dialog框架提交
 
 #### 使用
 1.添加依赖  
@@ -46,7 +42,7 @@ Dialog使用起来其实更简单,但是Google却是推荐尽量使用DialogFrag
  b.在model下build.gradle文件添加
 ```java
 支持Androidx
- implementation 'com.github.cl-6666:xDialog:v3.1.0'
+ implementation 'com.github.cl-6666:xDialog:v3.1.3'
 v7请使用
 implementation 'com.github.cl-6666:xDialog:v1.0.2'
 
