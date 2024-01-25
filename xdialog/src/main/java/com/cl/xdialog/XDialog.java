@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.cl.xdialog.adapter.TParams;
 import com.cl.xdialog.base.BaseDialogFragment;
 import com.cl.xdialog.base.BindViewHolder;
+import com.cl.xdialog.base.XBaseAdapter;
 import com.cl.xdialog.base.XController;
 import com.cl.xdialog.listener.OnBindViewListener;
 import com.cl.xdialog.listener.OnViewClickListener;
@@ -148,6 +149,13 @@ public class XDialog extends BaseDialogFragment {
         }
         return this;
     }
+    /**
+     * 返回getAdapter出去，方便外部调用notifyDataSetChanged()
+     */
+    public XBaseAdapter getAdapter() {
+        return xController.getAdapter();
+    }
+
 
     /*********************************************************************
      * 使用Builder模式实现

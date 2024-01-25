@@ -50,12 +50,6 @@ class XListDialog : XDialog() {
         }
     }
 
-    /**
-     * 返回getAdapter出去，方便外部调用notifyDataSetChanged()
-     */
-    val adapter: XBaseAdapter<*>?
-        get() = xController.adapter
-
 
     /*********************************************************************
      * 使用Builder模式实现

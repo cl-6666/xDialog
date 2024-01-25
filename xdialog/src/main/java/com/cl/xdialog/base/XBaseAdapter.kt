@@ -32,7 +32,6 @@ abstract class XBaseAdapter<T>(
         holder.itemView.setOnClickListener {
             adapterItemClickListener?.onItemClick(holder, position, datas[position], dialog)
         }
-
     }
 
     override fun getItemCount(): Int {

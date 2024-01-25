@@ -442,6 +442,7 @@ public class DiffentDialogActivity extends AppCompatActivity {
                     public void onItemClick(BindViewHolder holder, int position, String item, XDialog tDialog) {
                         Toast.makeText(DiffentDialogActivity.this, item, Toast.LENGTH_SHORT).show();
                         tDialog.dismiss();
+
                     }
                 })
                 .create()
