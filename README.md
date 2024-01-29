@@ -8,10 +8,6 @@
 
 #### 一.XDialog的由来
 所有框架的由来都是为了更方便,更高效的解决问题,XDialog也一样,是为了在项目中更高效的实现项目的弹窗效果
-
-XDialog是继承自DialogFragment进行封装的,大部分开发者在实现弹窗效果的时候,会首选系统提供的AlertDialog;
-但是使用系统的Dialog在某些情况下会出现问题,最常见的场景是当手机屏幕旋转时Dialog弹窗会消失,并抛出一个系统,这个异常不会导致异常崩溃,因为Google开发者知道这个问题,并进行了处理.
-Dialog使用起来其实更简单,但是Google却是推荐尽量使用DialogFragment.
 ##### 1.DialogFragment的优点
 * DialogFragment 本身是 Fragment 的子类，有着和 Fragment 基本一样的生命周期，使用 DialogFragment 来管理对话框，当旋转屏幕和按下后退键的时候可以更好的管理其生命周期
 * 在手机配置变化导致 Activity 需要重新创建时，例如旋转屏幕，基于 DialogFragment 的对话框将会由 FragmentManager 自动重建，然而基于 Dialog 实现的对话框却没有这样的能力
@@ -253,81 +249,32 @@ new XListDialog.Builder(getSupportFragmentManager())
     android:background="#ffffff"
     android:orientation="vertical" />
 ```
-TBaseAdapter实现:需要使用者传入item的xml布局,和List数据
-```java
-public abstract class XBaseAdapter<T> extends RecyclerView.Adapter<BindViewHolder> {
-
-    private final int layoutRes;
-    private List<T> datas;
-    private OnAdapterItemClickListener adapterItemClickListener;
-    private XDialog dialog;
-
-    protected abstract void onBind(BindViewHolder holder, int position, T t);
-
-    public XBaseAdapter(@LayoutRes int layoutRes, List<T> datas) {
-        this.layoutRes = layoutRes;
-        this.datas = datas;
-    }
-
-    @Override
-    public BindViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new BindViewHolder(LayoutInflater.from(parent.getContext()).inflate(layoutRes, parent, false));
-    }
-
-    @Override
-    public void onBindViewHolder(final BindViewHolder holder, final int position) {
-        onBind(holder, position, datas.get(position));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adapterItemClickListener.onItemClick(holder, position, datas.get(position), dialog);
-            }
-        });
-    }
-
-    @Override
-    public int getItemCount() {
-        return datas.size();
-    }
-
-    public void setTDialog(XDialog xDialog) {
-        this.dialog = xDialog;
-    }
-
-    public interface OnAdapterItemClickListener<T> {
-        void onItemClick(BindViewHolder holder, int position, T t, XDialog xDialog);
-    }
-
-    public void setOnAdapterItemClickListener(OnAdapterItemClickListener listener) {
-        this.adapterItemClickListener = listener;
-    }
-
-}
 
 ```
 ##### 如果使用者需要使用自己的列表布局时,可以使用setListLayoutRes(layotuRes,LayoutManager)方法设置xml布局和布局管理器LayoutManager,切记xml布局中的RecyclerView的id必须设置为recycler_view(如效果图中的分享弹窗)
 ```java
 //底部分享
 public void shareDialog(View view) {
-    new XListDialog.Builder(getSupportFragmentManager())
-            .setListLayoutRes(R.layout.dialog_share_recycler, LinearLayoutManager.HORIZONTAL)
-            .setScreenWidthAspect(this, 1.0f)
-            .setGravity(Gravity.BOTTOM)
-            .setAdapter(new TBaseAdapter<String>(R.layout.item_share, Arrays.asList(sharePlatform)) {
-                @Override
-                protected void onBind(BindViewHolder holder, int position, String s) {
-                    holder.setText(R.id.tv, s);
-                }
-            })
-            .setOnAdapterItemClickListener(new TBaseAdapter.OnAdapterItemClickListener<String>() {
-                @Override
-                public void onItemClick(BindViewHolder holder, int position, String item, XDialog xDialog) {
-                    Toast.makeText(DiffentDialogActivity.this, item, Toast.LENGTH_SHORT).show();
-                    xDialog.dismiss();
-                }
-            })
-            .create()
-            .show();
+     new XListDialog.Builder(getSupportFragmentManager())
+                .setListLayoutRes(R.layout.dialog_share_recycler, LinearLayoutManager.HORIZONTAL)
+                .setScreenWidthAspect(this, 1.0f)
+                .setGravity(Gravity.BOTTOM)
+                .setAdapter(new XBaseAdapter<String>(R.layout.item_share, Arrays.asList(sharePlatform)) {
+                    @Override
+                    protected void onBind(BindViewHolder holder, int position, String s) {
+                        holder.setText(R.id.tv, s);
+                    }
+                })
+                .setOnAdapterItemClickListener(new OnAdapterItemClickListener<String>() {
+                    @Override
+                    public void onItemClick(BindViewHolder holder, int position, String item, XDialog tDialog) {
+                        Toast.makeText(DiffentDialogActivity.this, item, Toast.LENGTH_SHORT).show();
+                        tDialog.dismiss();
+
+                    }
+                })
+                .create()
+                .show();
 }
 ```
 自定义列表布局
