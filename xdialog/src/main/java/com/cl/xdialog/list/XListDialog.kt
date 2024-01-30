@@ -46,7 +46,7 @@ class XListDialog : XDialog() {
                 xController.adapter!!.setOnAdapterItemClickListener(xController.adapterItemClickListener)
             }
         } else {
-            Log.d("TDialog", "列表弹窗需要先调用setAdapter()方法!")
+            Log.d("XDialog", "列表弹窗需要先调用setAdapter()方法!")
         }
     }
 
@@ -63,13 +63,18 @@ class XListDialog : XDialog() {
             params.mFragmentManager = fragmentManager
         }
 
-        //各种setXXX()方法设置数据
+        /**
+         * 各种setXXX()方法设置数据
+         */
         fun setLayoutRes(@LayoutRes layoutRes: Int): Builder {
             params.mLayoutRes = layoutRes
             return this
         }
 
-        //设置自定义列表布局和方向
+
+        /**
+         * 设置自定义列表布局和方向
+         */
         fun setListLayoutRes(@LayoutRes layoutRes: Int, orientation: Int): Builder {
             params.listLayoutRes = layoutRes
             params.orientation = orientation
@@ -137,7 +142,9 @@ class XListDialog : XDialog() {
             return this
         }
 
-        //列表数据,需要传入数据和Adapter,和item点击数据
+        /**
+         * 列表数据,需要传入数据和Adapter,和item点击数据
+         */
         fun <A : XBaseAdapter<*>?> setAdapter(adapter: A): Builder {
             params.adapter = adapter
             return this

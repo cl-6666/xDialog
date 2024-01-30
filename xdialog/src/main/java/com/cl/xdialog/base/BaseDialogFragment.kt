@@ -16,12 +16,10 @@ import androidx.fragment.app.FragmentManager
 
 /**
  * 项目：xDialog
- * 版权：蒲公英公司 版权所有
  * 作者：Arry
  * 版本：1.0
  * 创建日期：2019-08-17
  * 描述：
- *
  *
  * DialogFragment的基类
  * 1.系统默认onCreateDialog方法返回一个Dialog对象,对其不做处理

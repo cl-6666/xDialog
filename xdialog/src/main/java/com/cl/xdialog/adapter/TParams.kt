@@ -38,7 +38,7 @@ class TParams<T : XBaseAdapter<*>?> {
     var mGravity = Gravity.CENTER
 
     @JvmField
-    var mTag = "TDialog"
+    var mTag = "XDialog"
 
     @JvmField
     var ids: IntArray? = null
@@ -52,17 +52,26 @@ class TParams<T : XBaseAdapter<*>?> {
     @JvmField
     var bindViewListener: OnBindViewListener? = null
 
+    /**
+     * 弹窗动画
+     */
     @JvmField
-    var mDialogAnimationRes = 0 //弹窗动画
+    var mDialogAnimationRes = 0
 
     //列表
     var adapter: T? = null
     var adapterItemClickListener: OnAdapterItemClickListener<*>? = null
     var listLayoutRes = 0
-    var orientation = LinearLayoutManager.VERTICAL //默认RecyclerView的列表方向为垂直方向
+    /**
+     * 默认RecyclerView的列表方向为垂直方向
+     */
+    var orientation = LinearLayoutManager.VERTICAL
 
+    /**
+     * 直接使用传入进来的View,而不需要通过解析Xml
+     */
     @JvmField
-    var mDialogView //直接使用传入进来的View,而不需要通过解析Xml
+    var mDialogView
             : View? = null
 
     @JvmField

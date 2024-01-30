@@ -9,5 +9,5 @@ import com.cl.xdialog.base.BindViewHolder
  * desc：
  */
 interface OnAdapterItemClickListener<T> {
-     fun onItemClick(holder: BindViewHolder?, position: Int, t: T, tDialog: XDialog?)
+     fun onItemClick(holder: BindViewHolder?, position: Int, t: T, xDialog: XDialog?)
 }
