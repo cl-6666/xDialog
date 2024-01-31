@@ -1,10 +1,26 @@
+```
+
+                                                                          
+               ,---,                          ,--,                        
+             .'  .' `\    ,--,              ,--.'|                        
+           ,---.'     \ ,--.'|              |  | :     ,---.              
+ ,--,  ,--,|   |  .`\  ||  |,               :  : '    '   ,'\   ,----._,. 
+ |'. \/ .`|:   : |  '  |`--'_      ,--.--.  |  ' |   /   /   | /   /  ' / 
+ '  \/  / ;|   ' '  ;  :,' ,'|    /       \ '  | |  .   ; ,. :|   :     | 
+  \  \.' / '   | ;  .  |'  | |   .--.  .-. ||  | :  '   | |: :|   | .\  . 
+   \  ;  ; |   | :  |  '|  | :    \__\/: . .'  : |__'   | .; :.   ; ';  | 
+  / \  \  \'   : | /  ; '  : |__  ," .--.; ||  | '.'|   :    |'   .   . | 
+./__;   ;  \   | '` ,/  |  | '.'|/  /  ,.  |;  :    ;\   \  /  `---`-'| | 
+|   :/\  \ ;   :  .'    ;  :    ;  :   .'   \  ,   /  `----'   .'__/\_: | 
+`---'  `--`|   ,.'      |  ,   /|  ,     .-./---`-'            |   :    : 
+           '---'         ---`-'  `--`---'                       \   \  /  
+                                                                 `--`-'   
+```
+
+
 #### 前言
 >我看到很多封装Dialog的，但是我觉得都有缺点，所以我也就取其中一个封装通用的弹窗Dialog出来，支持AndroidX，平常开发当中自用，会经常维护。
 >建议以依赖方式使用，最后希望大家能给出宝贵的意见。
-##### 文章目录
-* XDialog框架的由来
-* 框架使用解析
-* 框架原理解析
 
 #### 一.XDialog的由来
 所有框架的由来都是为了更方便,更高效的解决问题,XDialog也一样,是为了在项目中更高效的实现项目的弹窗效果
@@ -176,7 +192,8 @@ new XDialog.Builder(getSupportFragmentManager())
 })
 ```
 7.监听弹窗子控件的点击事件,内部也是通过BindViewHolder实现
-addOnClickListener(ids[])只需要将点击事件控件的id传入,并设置回调接口setOnViewClickListener()
+addOnClickListener(ids[])只需要将点击事件控件的id传入,并设置回调接口setOnViewClickListener()  
+
 ```java
 .addOnClickListener(R.id.btn_right, R.id.tv_title)
 .setOnViewClickListener(new OnViewClickListener() {
@@ -250,10 +267,9 @@ new XListDialog.Builder(getSupportFragmentManager())
     android:orientation="vertical" />
 ```
 
-```
 ##### 如果使用者需要使用自己的列表布局时,可以使用setListLayoutRes(layotuRes,LayoutManager)方法设置xml布局和布局管理器LayoutManager,切记xml布局中的RecyclerView的id必须设置为recycler_view(如效果图中的分享弹窗)
-```java
-//底部分享
+
+```
 public void shareDialog(View view) {
      new XListDialog.Builder(getSupportFragmentManager())
                 .setListLayoutRes(R.layout.dialog_share_recycler, LinearLayoutManager.HORIZONTAL)
@@ -276,7 +292,8 @@ public void shareDialog(View view) {
                 .create()
                 .show();
 }
-```
+``` 
+
 自定义列表布局
 ```java
 <?xml version="1.0" encoding="utf-8"?>
