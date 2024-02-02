@@ -20,4 +20,11 @@
         <item name="android:windowExitAnimation">@anim/exit_scale_dialog</item>
     </style>
 
+    <style name="DatePickerStyle">
+        <item name="wheelTextSize">24sp</item>
+        <item name="wheelTextColor">#bdbdbd</item>
+        <item name="wheelSelectedTextColor">#000000</item>
+        <item name="wheelDividerColor">#D81B60</item>
+    </style>
+
 </resources>

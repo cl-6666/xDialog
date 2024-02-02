@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.cl.dialog.ui.DatePickerTestActivity;
 import com.cl.dialog.ui.DialogEncapActivity;
 import com.cl.dialog.ui.DiffentDialogActivity;
 import com.cl.dialog.ui.NormalDFActivity;
@@ -22,14 +23,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
-
     public void diffentDialog2(View view) {
-
-
+        startActivity(new Intent(this, DatePickerTestActivity.class));
     }
-
 
 
     /**

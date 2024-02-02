@@ -5,6 +5,8 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.view.View
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.cl.xdialog.listener.OnAdapterItemClickListener
 import com.cl.xdialog.listener.OnBindViewListener
 import com.cl.xdialog.listener.OnViewClickListener
@@ -39,7 +41,10 @@ open class XController<A : XBaseAdapter<*>?> : Parcelable, Serializable {
     var adapter: A? = null
         private set
     var adapterItemClickListener: OnAdapterItemClickListener<*>? = null
-    var orientation = 0
+
+
+    var orientation:LinearLayoutManager? = null
+    var spanCount:GridLayoutManager?=null
     var dialogAnimationRes = 0
     var dialogView: View? = null
     var onDismissListener: DialogInterface.OnDismissListener? = null
@@ -56,7 +61,6 @@ open class XController<A : XBaseAdapter<*>?> : Parcelable, Serializable {
         tag = `in`.readString()
         ids = `in`.createIntArray()
         isCancelableOutside = `in`.readByte().toInt() != 0
-        orientation = `in`.readInt()
     }
 
     //内容描述接口,不用管
@@ -73,7 +77,6 @@ open class XController<A : XBaseAdapter<*>?> : Parcelable, Serializable {
         dest.writeString(tag)
         dest.writeIntArray(ids)
         dest.writeByte((if (isCancelableOutside) 1 else 0).toByte())
-        dest.writeInt(orientation)
     }
 
     fun setAdapter(adapter: A) {

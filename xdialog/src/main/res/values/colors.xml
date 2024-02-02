@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="x_wheel_text_color">#727272</color>
+    <color name="x_wheel_selected_text_color">#1db0b8</color>
+    <color name="x_wheel_highlight_color">#00000000</color>
+    <color name="x_wheel_divider_color">#80808080</color>
+</resources>

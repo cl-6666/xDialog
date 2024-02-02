@@ -27,16 +27,16 @@
         <!--android:text="DialogFragment的使用"-->
         <!--android:textAllCaps="false" />-->
 
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:onClick="DialogEncap"
-        android:text="DialogFragment封装"
-        android:textAllCaps="false" />
+<!--    <Button-->
+<!--        android:id="@+id/button4"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:onClick="DialogEncap"-->
+<!--        android:text="DialogFragment封装"-->
+<!--        android:textAllCaps="false" />-->
 
     <Button
         android:id="@+id/button5"
@@ -58,7 +58,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:onClick="diffentDialog2"
-        android:text="滚动日期选择Dialog"
+        android:text="滚动选择相关展示"
         android:textAllCaps="false" />
 
 

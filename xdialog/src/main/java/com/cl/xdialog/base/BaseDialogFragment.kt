@@ -146,7 +146,7 @@ abstract class BaseDialogFragment : DialogFragment() {
         get() = 0
 
     companion object {
-        const val TAG = "TDialog"
+        const val TAG = "XDialog"
 
         //默认透明度为0.2
         const val dimAmount = 0.2f

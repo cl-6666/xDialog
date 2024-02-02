@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cl.xdialog.R
@@ -38,7 +39,8 @@ class XListDialog : XDialog() {
                 ?: throw IllegalArgumentException("自定义列表xml布局,请设置RecyclerView的控件id为recycler_view")
             xController.adapter!!.setTDialog(this)
             val layoutManager: RecyclerView.LayoutManager =
-                LinearLayoutManager(view.context, xController.orientation, false)
+                xController.orientation ?: xController.spanCount
+                ?: LinearLayoutManager(view.context)
             recyclerView.layoutManager = layoutManager
             recyclerView.adapter = xController.adapter
             xController.adapter!!.notifyDataSetChanged()
@@ -73,11 +75,20 @@ class XListDialog : XDialog() {
 
 
         /**
-         * 设置自定义列表布局和方向
+         * 设置自定义LayoutManager列表布局和方向
          */
-        fun setListLayoutRes(@LayoutRes layoutRes: Int, orientation: Int): Builder {
+        fun setListLayoutRes(@LayoutRes layoutRes: Int, orientation: LinearLayoutManager): Builder {
             params.listLayoutRes = layoutRes
             params.orientation = orientation
+            return this
+        }
+
+        /**
+         * 设置自定义GridLayout列表布局和方向
+         */
+        fun setGridLayoutRes(@LayoutRes layoutRes: Int, spanCount: GridLayoutManager): Builder {
+            params.listLayoutRes = layoutRes
+            params.spanCount = spanCount
             return this
         }
 

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.cl.dialog.R;
@@ -396,8 +397,7 @@ public class DiffentDialogActivity extends AppCompatActivity {
                 .setScreenWidthAspect(this, 1.0f)
                 .setGravity(Gravity.BOTTOM)
                 .addOnClickListener(R.id.btn_evluate)
-                .
-                setOnBindViewListener
+                .setOnBindViewListener
 
                         (new OnBindViewListener() {
                     @Override
@@ -412,14 +412,11 @@ public class DiffentDialogActivity extends AppCompatActivity {
                         });
                     }
                 })
-                .setOnViewClickListener(new OnViewClickListener() {
-                    @Override
-                    public void onViewClick(BindViewHolder viewHolder, View view, XDialog tDialog) {
-                        EditText editText = viewHolder.getView(R.id.editText);
-                        String content = editText.getText().toString().trim();
-                        Toast.makeText(DiffentDialogActivity.this, "评价内容:" + content, Toast.LENGTH_SHORT).show();
-                        tDialog.dismiss();
-                    }
+                .setOnViewClickListener((viewHolder, view1, tDialog) -> {
+                    EditText editText = viewHolder.getView(R.id.editText);
+                    String content = editText.getText().toString().trim();
+                    Toast.makeText(DiffentDialogActivity.this, "评价内容:" + content, Toast.LENGTH_SHORT).show();
+                    tDialog.dismiss();
                 })
                 .create()
                 .show();
@@ -428,7 +425,7 @@ public class DiffentDialogActivity extends AppCompatActivity {
     //底部分享
     public void shareDialog(View view) {
         new XListDialog.Builder(getSupportFragmentManager())
-                .setListLayoutRes(R.layout.dialog_share_recycler, LinearLayoutManager.HORIZONTAL)
+                .setListLayoutRes(R.layout.dialog_share_recycler, new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
                 .setScreenWidthAspect(this, 1.0f)
                 .setGravity(Gravity.BOTTOM)
                 .setAdapter(new XBaseAdapter<String>(R.layout.item_share, Arrays.asList(sharePlatform)) {
@@ -437,13 +434,31 @@ public class DiffentDialogActivity extends AppCompatActivity {
                         holder.setText(R.id.tv, s);
                     }
                 })
-                .setOnAdapterItemClickListener(new OnAdapterItemClickListener<String>() {
-                    @Override
-                    public void onItemClick(BindViewHolder holder, int position, String item, XDialog tDialog) {
-                        Toast.makeText(DiffentDialogActivity.this, item, Toast.LENGTH_SHORT).show();
-                        tDialog.dismiss();
+                .setOnAdapterItemClickListener((OnAdapterItemClickListener<String>) (holder, position, item, tDialog) -> {
+                    Toast.makeText(DiffentDialogActivity.this, item, Toast.LENGTH_SHORT).show();
+                    tDialog.dismiss();
 
+                })
+                .create()
+                .show();
+    }
+
+
+    public void multipleDisplaysDialog(View view){
+        new XListDialog.Builder(getSupportFragmentManager())
+                .setGridLayoutRes(R.layout.dialog_share_recycler, new GridLayoutManager(this, 4))
+                .setScreenWidthAspect(this, 1.0f)
+                .setGravity(Gravity.BOTTOM)
+                .setAdapter(new XBaseAdapter<String>(R.layout.item_share, Arrays.asList(sharePlatform)) {
+                    @Override
+                    protected void onBind(BindViewHolder holder, int position, String s) {
+                        holder.setText(R.id.tv, s);
                     }
+                })
+                .setOnAdapterItemClickListener((OnAdapterItemClickListener<String>) (holder, position, item, tDialog) -> {
+                    Toast.makeText(DiffentDialogActivity.this, item, Toast.LENGTH_SHORT).show();
+                    tDialog.dismiss();
+
                 })
                 .create()
                 .show();

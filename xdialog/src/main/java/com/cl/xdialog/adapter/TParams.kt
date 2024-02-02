@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.view.Gravity
 import android.view.View
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cl.xdialog.R
 import com.cl.xdialog.base.XBaseAdapter
@@ -58,14 +59,21 @@ class TParams<T : XBaseAdapter<*>?> {
     @JvmField
     var mDialogAnimationRes = 0
 
-    //列表
+    /**
+     * 列表适配器
+     */
     var adapter: T? = null
     var adapterItemClickListener: OnAdapterItemClickListener<*>? = null
     var listLayoutRes = 0
     /**
      * 默认RecyclerView的列表方向为垂直方向
      */
-    var orientation = LinearLayoutManager.VERTICAL
+    var orientation : LinearLayoutManager? = null
+
+    /**
+     * 默认RecyclerView的列表方向为垂直方向
+     */
+    var spanCount : GridLayoutManager? = null
 
     /**
      * 直接使用传入进来的View,而不需要通过解析Xml
@@ -114,13 +122,13 @@ class TParams<T : XBaseAdapter<*>?> {
                 tController.layoutRes = listLayoutRes
             }
             tController.orientation = orientation
+            tController.spanCount = spanCount
         } else {
             require(!(tController.layoutRes <= 0 && tController.dialogView == null)) { "请先调用setLayoutRes()方法设置弹窗所需的xml布局!" }
         }
         if (adapterItemClickListener != null) {
             tController.adapterItemClickListener = adapterItemClickListener
         }
-
         //如果宽高都没有设置,则默认给弹窗提供宽度为600
         if (tController.width <= 0 && tController.height <= 0) {
             tController.width = 600

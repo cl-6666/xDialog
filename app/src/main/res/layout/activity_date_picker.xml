@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="请选择出生年月"
+            android:textColor="@color/T_00"
+            android:textSize="28dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/T_00"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <com.cl.xdialog.choose.Wheel3DView
+                android:id="@+id/wv_year"
+                style="@style/DatePickerStyle"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content" />
+
+            <com.cl.xdialog.choose.Wheel3DView
+                android:id="@+id/wv_month"
+                style="@style/DatePickerStyle"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                app:wheelCyclic="true" />
+
+            <com.cl.xdialog.choose.Wheel3DView
+                android:id="@+id/wv_day"
+                style="@style/DatePickerStyle"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                app:wheelCyclic="true" />
+        </LinearLayout>
+
+
+        <com.cl.xdialog.choose.Wheel3DView
+            android:id="@+id/wheel_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:wheelCyclic="true"
+            app:wheelDividerColor="@color/x_wheel_selected_text_color"
+            app:wheelEntries="@array/default_arra"
+            app:wheelHighlightColor="@color/topic_trans"
+            app:wheelItemCount="9"
+            app:wheelItemHeight="40dp"
+            app:wheelItemWidth="160dp"
+            app:wheelSelectedTextColor="@color/T_00"
+            app:wheelTextColor="@color/topic"
+            app:wheelTextSize="17dp" />
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -21,6 +21,7 @@
         <activity android:name=".ui.SystemDialog" />
         <activity android:name=".ui.NormalDFActivity" />
         <activity android:name=".ui.DialogEncapActivity" />
+        <activity android:name=".ui.DatePickerTestActivity" />
         <activity android:name=".ui.DiffentDialogActivity">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
