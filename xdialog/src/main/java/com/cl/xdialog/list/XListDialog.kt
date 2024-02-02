@@ -100,6 +100,9 @@ class XListDialog : XDialog() {
             return this
         }
 
+        /**
+         * 设置弹窗宽度
+         */
         fun setWidth(widthPx: Int): Builder {
             params.mWidth = widthPx
             return this

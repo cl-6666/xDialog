@@ -275,6 +275,9 @@ public class XDialog extends BaseDialogFragment {
             return this;
         }
 
+        /**
+         * 设置弹窗的标记
+         */
         public Builder setTag(String tag) {
             params.mTag = tag;
             return this;
