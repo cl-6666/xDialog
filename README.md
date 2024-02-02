@@ -23,7 +23,7 @@
 >建议以依赖方式使用，最后希望大家能给出宝贵的意见。
 
 #### 效果演示  
-<img src="https://github.com/cl-6666/xDialog/blob/master/img/jies.gif" alt="演示"/>  
+<img src="https://github.com/cl-6666/xDialog/blob/master/img/jies.gif" alt="演示"/><img src="https://github.com/cl-6666/xDialog/blob/master/img/xzkj.gif" alt="演示"/>  
 
 版本更新历史:  
 [![](https://jitpack.io/v/cl-6666/xDialog.svg)](https://jitpack.io/#cl-6666/xDialog)  
