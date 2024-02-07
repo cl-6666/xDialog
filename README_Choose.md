@@ -14,6 +14,7 @@
 ``` java
 xml配置
         <attr name="wheelCyclic" format="boolean"/>
+        //可以绑定固定的数组，例如：@array/default_arra
         <attr name="wheelEntries" format="reference"/>
         <attr name="wheelItemCount" format="integer"/>
         <attr name="wheelItemWidth" format="dimension"/>
