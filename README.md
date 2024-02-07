@@ -28,6 +28,11 @@
 版本更新历史:  
 [![](https://jitpack.io/v/cl-6666/xDialog.svg)](https://jitpack.io/#cl-6666/xDialog)  
 
+- v3.1.6：(2024年01月25日)
+  - 增加日期选择控件
+  - 增加list弹窗支持一行显示多个
+  - 代码优化
+
 - v3.1.3：(2024年01月25日)
   - 解决使用XListDialog的时候，无法刷新适配器问题
   - 代码优化
