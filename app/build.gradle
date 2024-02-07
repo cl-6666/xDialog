@@ -34,9 +34,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-//    implementation project(':xdialog')
+    implementation project(':xdialog')
 
-    implementation 'com.github.cl-6666:xDialog:v3.1.6'
+//    implementation 'com.github.cl-6666:xDialog:v3.1.6'
 
     //内存泄漏检测
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'

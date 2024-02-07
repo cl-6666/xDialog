@@ -1,6 +1,7 @@
 package com.cl.xdialog.adapter
 
 import android.content.DialogInterface
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import androidx.fragment.app.FragmentManager
@@ -52,13 +53,11 @@ class TParams<T : XBaseAdapter<*>?> {
 
     @JvmField
     var bindViewListener: OnBindViewListener? = null
-
     /**
      * 弹窗动画
      */
     @JvmField
     var mDialogAnimationRes = 0
-
     /**
      * 列表适配器
      */
@@ -68,20 +67,16 @@ class TParams<T : XBaseAdapter<*>?> {
     /**
      * 默认RecyclerView的列表方向为垂直方向
      */
-    var orientation : LinearLayoutManager? = null
-
+    var orientation: LinearLayoutManager? = null
     /**
      * 默认RecyclerView的列表方向为垂直方向
      */
-    var spanCount : GridLayoutManager? = null
-
+    var spanCount: GridLayoutManager? = null
     /**
      * 直接使用传入进来的View,而不需要通过解析Xml
      */
     @JvmField
-    var mDialogView
-            : View? = null
-
+    var mDialogView: View? = null
     @JvmField
     var mOnDismissListener: DialogInterface.OnDismissListener? = null
 
@@ -121,15 +116,20 @@ class TParams<T : XBaseAdapter<*>?> {
             } else {
                 tController.layoutRes = listLayoutRes
             }
-            tController.orientation = orientation
-            tController.spanCount = spanCount
+            //如果当前的数据不为空,则设置列表的方向和列数
+            if (!adapter!!.isEmpty){
+                tController.orientation = orientation
+                tController.spanCount = spanCount
+            }
         } else {
             require(!(tController.layoutRes <= 0 && tController.dialogView == null)) { "请先调用setLayoutRes()方法设置弹窗所需的xml布局!" }
         }
         if (adapterItemClickListener != null) {
             tController.adapterItemClickListener = adapterItemClickListener
         }
-        //如果宽高都没有设置,则默认给弹窗提供宽度为600
+        /**
+         * 如果宽高都没有设置,则默认给弹窗提供宽度为600
+         */
         if (tController.width <= 0 && tController.height <= 0) {
             tController.width = 600
         }

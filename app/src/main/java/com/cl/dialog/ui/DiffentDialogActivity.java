@@ -41,6 +41,9 @@ public class DiffentDialogActivity extends AppCompatActivity {
     private static final int WHAT_PROGRESS = 1;
     private String[] data = {"java", "android", "NDK", "c++", "python", "ios", "Go", "Unity3D", "Kotlin", "Swift", "js"};
     private String[] sharePlatform = {"微信", "朋友圈", "短信", "微博", "QQ空间", "Google", "FaceBook", "微信", "朋友圈", "短信", "微博", "QQ空间"};
+
+    private String[] test = {"微信"};
+
     private static XDialog tDialog;
     static int currProgress = 5;
     private static ProgressBar progressBar;
@@ -450,6 +453,27 @@ public class DiffentDialogActivity extends AppCompatActivity {
                 .setScreenWidthAspect(this, 1.0f)
                 .setGravity(Gravity.BOTTOM)
                 .setAdapter(new XBaseAdapter<String>(R.layout.item_share, Arrays.asList(sharePlatform)) {
+                    @Override
+                    protected void onBind(BindViewHolder holder, int position, String s) {
+                        holder.setText(R.id.tv, s);
+                    }
+                })
+                .setOnAdapterItemClickListener((OnAdapterItemClickListener<String>) (holder, position, item, tDialog) -> {
+                    Toast.makeText(DiffentDialogActivity.this, item, Toast.LENGTH_SHORT).show();
+                    tDialog.dismiss();
+
+                })
+                .create()
+                .show();
+    }
+
+
+    public void listEmptyViewDialog(View view){
+        new XListDialog.Builder(getSupportFragmentManager())
+                .setGridLayoutRes(R.layout.dialog_share_recycler, new GridLayoutManager(this, 4))
+                .setScreenWidthAspect(this, 1.0f)
+                .setGravity(Gravity.BOTTOM)
+                .setAdapter(new XBaseAdapter<String>(R.layout.item_share, Arrays.asList()) {
                     @Override
                     protected void onBind(BindViewHolder holder, int position, String s) {
                         holder.setText(R.id.tv, s);
