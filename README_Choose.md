@@ -11,7 +11,7 @@
 |	setNoTextColor	|	设置没有选中时的文字颜色	|
 |	setWhenSelectedTextColor	|	设置选中时的文字颜色	|
 
-``` java
+```xml
 xml配置
         <attr name="wheelCyclic" format="boolean"/>
         //可以绑定固定的数组，例如：@array/default_arra
@@ -30,7 +30,7 @@ xml配置
 
 ### 使用方法
 在xml文件中添加
-``` java
+```xml
       <com.cl.xdialog.choose.Wheel3DView
             android:id="@+id/wheel_list"
             android:layout_width="wrap_content"
@@ -47,7 +47,7 @@ xml配置
             app:wheelTextSize="17dp" />
 ```
 回调监听
-``` java
+```java
 WheelView wheelView = (WheelView) findViewById(R.id.wheel);
 wheelView.setOnWheelChangedListener(new OnWheelChangedListener() {
     @Override
@@ -57,3 +57,4 @@ wheelView.setOnWheelChangedListener(new OnWheelChangedListener() {
     }
 });
 ```
+ 
