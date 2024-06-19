@@ -66,4 +66,5 @@ implementation 'com.github.cl-6666:xDialog:v1.0.2'
 https://blog.csdn.net/a214024475/article/details/100926426
 
 #### QQ 群：458173716  
-<img src="https://github.com/cl-6666/serialPort/blob/master/qq2.jpg" width="350" height="560" alt="演示"/>  
+<img src="https://github.com/cl-6666/serialPort/blob/master/img/qq2.jpg" width="350" height="560" alt="演示"/>  
+
