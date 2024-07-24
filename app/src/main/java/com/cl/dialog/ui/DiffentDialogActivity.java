@@ -303,6 +303,7 @@ public class DiffentDialogActivity extends AppCompatActivity {
                 .setLayoutRes(R.layout.dialog_home_ad)
                 .setScreenHeightAspect(this, 0.7f)
                 .setScreenWidthAspect(this, 0.8f)
+                .setDimAmount(0.6f)
                 .setOnBindViewListener(viewHolder -> {
                     //可对图片进行修改
                 })
@@ -310,6 +311,7 @@ public class DiffentDialogActivity extends AppCompatActivity {
                 .setOnViewClickListener((viewHolder, view1, tDialog) -> tDialog.dismiss())
                 .create()
                 .show();
+
     }
 
     public void updateHead(View view) {
