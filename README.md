@@ -53,8 +53,8 @@
 ```
  b.在model下build.gradle文件添加
 ```java
-支持Androidx
- implementation 'com.github.cl-6666:xDialog:v3.1.8'
+支持Androidx  
+implementation 'com.github.cl-6666:xDialog:v3.1.9'
 v7请使用
 implementation 'com.github.cl-6666:xDialog:v1.0.2'
 ```  
