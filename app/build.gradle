@@ -35,7 +35,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
 //    implementation project(':xdialog')
-    implementation 'com.github.cl-6666:xDialog:v3.1.8'
+    implementation 'com.github.cl-6666:xDialog:v3.1.9'
     //内存泄漏检测
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
 
