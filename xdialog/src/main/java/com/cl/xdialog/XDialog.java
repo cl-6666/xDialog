@@ -119,6 +119,10 @@ public class XDialog extends BaseDialogFragment {
         return xController.getTag();
     }
 
+    @Override
+    public float getDimAmount() {
+        return xController.getDimAmount();    }
+
     public OnViewClickListener getOnViewClickListener() {
         return xController.getOnViewClickListener();
     }

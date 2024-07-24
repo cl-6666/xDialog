@@ -133,6 +133,11 @@ abstract class BaseDialogFragment : DialogFragment() {
         get() = WindowManager.LayoutParams.WRAP_CONTENT
     open val fragmentTag: String?
         get() = TAG
+    //设置透明度，默认0.2f
+    open val dimAmount: Float
+        get() {
+            return 0.2f
+        }
 
     fun show(fragmentManager: FragmentManager?) {
         show(fragmentManager!!, fragmentTag)
@@ -147,15 +152,11 @@ abstract class BaseDialogFragment : DialogFragment() {
 
     companion object {
         const val TAG = "XDialog"
-
-        //默认透明度为0.2
-        const val dimAmount = 0.2f
         //获取设备屏幕宽度
         @JvmStatic
         fun getScreenWidth(context: Context): Int {
             return context.resources.displayMetrics.widthPixels
         }
-
         //获取设备屏幕高度
         @JvmStatic
         fun getScreenHeight(context: Context): Int {
