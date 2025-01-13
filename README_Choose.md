@@ -12,19 +12,53 @@
 |	setWhenSelectedTextColor	|	设置选中时的文字颜色	|
 
 ```xml
-xml配置
-        <attr name="wheelCyclic" format="boolean"/>
-        //可以绑定固定的数组，例如：@array/default_arra
-        <attr name="wheelEntries" format="reference"/>
-        <attr name="wheelItemCount" format="integer"/>
-        <attr name="wheelItemWidth" format="dimension"/>
-        <attr name="wheelItemHeight" format="dimension"/>
-        <attr name="wheelTextSize" format="dimension"/>
-        <attr name="wheelTextColor" format="color"/>
-        <attr name="wheelSelectedTextColor" format="color"/>
-        <attr name="wheelDividerColor" format="color"/>
-        <attr name="wheelHighlightColor" format="color"/>
-        <attr name="wheelMiddleLayerColor" format="color"/>
+xml配置属性介绍
+  <declare-styleable name="X_WheelView">
+    <!-- 是否启用循环滚动，true 为循环，false 为不循环 -->
+    <attr name="wheelCyclic" format="boolean"/>
+    
+    <!-- 滚轮的内容数据来源，可以是一个字符串数组或资源引用 -->
+    <attr name="wheelEntries" format="reference"/>
+    
+    <!-- 滚轮同时可见的项目数量 -->
+    <attr name="wheelItemCount" format="integer"/>
+    
+    <!-- 每个滚轮项的宽度 -->
+    <attr name="wheelItemWidth" format="dimension"/>
+    
+    <!-- 每个滚轮项的高度 -->
+    <attr name="wheelItemHeight" format="dimension"/>
+    
+    <!-- 滚轮项文字的字体大小 -->
+    <attr name="wheelTextSize" format="dimension"/>
+    
+    <!-- 滚轮项文字的默认颜色 -->
+    <attr name="wheelTextColor" format="color"/>
+    
+    <!-- 当前选中项文字的颜色 -->
+    <attr name="wheelSelectedTextColor" format="color"/>
+    
+    <!-- 滚轮分割线的颜色 -->
+    <attr name="wheelDividerColor" format="color"/>
+    
+    <!-- 选中区域的高亮背景色 -->
+    <attr name="wheelHighlightColor" format="color"/>
+    
+    <!-- 滚轮中间层的颜色，通常用于遮罩或分层效果 -->
+    <attr name="wheelMiddleLayerColor" format="color"/>
+</declare-styleable>
+
+<declare-styleable name="X_Wheel3DView">
+    <!-- 滚轮的3D视角方向 -->
+    <attr name="wheelToward" format="enum">
+        <!-- 不倾斜，保持垂直视图 -->
+        <enum name="none" value="0"/>
+        <!-- 向左倾斜 -->
+        <enum name="left" value="-1"/>
+        <!-- 向右倾斜 -->
+        <enum name="right" value="1"/>
+    </attr>
+</declare-styleable>
 
 ```
 
