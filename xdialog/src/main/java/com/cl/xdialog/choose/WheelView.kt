@@ -437,7 +437,7 @@ open class WheelView @JvmOverloads constructor(context: Context, attrs: Attribut
             setCurrentIndex(index, false)
         }
 
-    private fun setCurrentIndex(index: Int, animated: Boolean) {
+    fun setCurrentIndex(index: Int, animated: Boolean) {
         mScroller.setCurrentIndex(index, animated)
     }
 
