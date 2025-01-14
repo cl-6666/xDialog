@@ -28,6 +28,10 @@
 版本更新历史:  
 [![](https://jitpack.io/v/cl-6666/xDialog.svg)](https://jitpack.io/#cl-6666/xDialog)  
 
+- v3.2.0：(2025年01月15日)
+  - 对外增加选中方法setCurrentIndex
+  - 代码优化
+
 - v3.1.9：(2024年07月25日)
   - 修复透明度设置不生效问题
   - 代码优化
@@ -54,7 +58,7 @@
  b.在model下build.gradle文件添加
 ```java
 支持Androidx  
-implementation 'com.github.cl-6666:xDialog:v3.1.9'
+implementation 'com.github.cl-6666:xDialog:v3.2.0'
 v7请使用
 implementation 'com.github.cl-6666:xDialog:v1.0.2'
 ```  
