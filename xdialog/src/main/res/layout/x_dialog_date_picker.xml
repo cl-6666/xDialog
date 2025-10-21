@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/x_dialog_bg"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- 标题区域 -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="选择日期"
+        android:textColor="@color/x_dialog_title_color"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp" />
+
+    <!-- 日期选择器区域 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="24dp">
+
+        <!-- 年份选择器 -->
+        <com.cl.xdialog.choose.Wheel3DView
+            android:id="@+id/wheel_year"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_weight="1"
+            app:wheelCyclic="false"
+            app:wheelItemCount="7"
+            app:wheelItemHeight="40dp"
+            app:wheelTextSize="16sp"
+            app:wheelTextColor="@color/x_wheel_text_color"
+            app:wheelSelectedTextColor="@color/x_wheel_selected_text_color"
+            app:wheelDividerColor="@color/x_wheel_divider_color"
+            app:wheelHighlightColor="@color/x_wheel_highlight_color" />
+
+        <!-- 月份选择器 -->
+        <com.cl.xdialog.choose.Wheel3DView
+            android:id="@+id/wheel_month"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_weight="1"
+            app:wheelCyclic="true"
+            app:wheelItemCount="7"
+            app:wheelItemHeight="40dp"
+            app:wheelTextSize="16sp"
+            app:wheelTextColor="@color/x_wheel_text_color"
+            app:wheelSelectedTextColor="@color/x_wheel_selected_text_color"
+            app:wheelDividerColor="@color/x_wheel_divider_color"
+            app:wheelHighlightColor="@color/x_wheel_highlight_color" />
+
+        <!-- 日期选择器 -->
+        <com.cl.xdialog.choose.Wheel3DView
+            android:id="@+id/wheel_day"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_weight="1"
+            app:wheelCyclic="true"
+            app:wheelItemCount="7"
+            app:wheelItemHeight="40dp"
+            app:wheelTextSize="16sp"
+            app:wheelTextColor="@color/x_wheel_text_color"
+            app:wheelSelectedTextColor="@color/x_wheel_selected_text_color"
+            app:wheelDividerColor="@color/x_wheel_divider_color"
+            app:wheelHighlightColor="@color/x_wheel_highlight_color" />
+
+    </LinearLayout>
+
+    <!-- 按钮区域 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- 取消按钮 -->
+        <TextView
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/x_dialog_btn_cancel_bg"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/x_dialog_btn_cancel_text_color"
+            android:textSize="16sp" />
+
+        <!-- 确定按钮 -->
+        <TextView
+            android:id="@+id/btn_confirm"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/x_dialog_btn_confirm_bg"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/x_dialog_btn_confirm_text_color"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

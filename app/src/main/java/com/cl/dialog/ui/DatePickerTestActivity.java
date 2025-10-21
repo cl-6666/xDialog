@@ -49,6 +49,7 @@ public class DatePickerTestActivity extends AppCompatActivity {
             updateTextView();
         });
 
+
         mYear = 1980;
         mMonth = 1;
         mDay = 1;

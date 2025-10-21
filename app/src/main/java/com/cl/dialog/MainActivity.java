@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.cl.dialog.ui.DatePickerTestActivity;
+import com.cl.dialog.ui.DialogDemoActivity;
 import com.cl.dialog.ui.DialogEncapActivity;
 import com.cl.dialog.ui.DiffentDialogActivity;
 import com.cl.dialog.ui.NormalDFActivity;
@@ -22,11 +23,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
     }
-
-    public void diffentDialog2(View view) {
-        startActivity(new Intent(this, DatePickerTestActivity.class));
-    }
-
 
     /**
      * 系统Dialog使用
@@ -63,4 +59,19 @@ public class MainActivity extends AppCompatActivity {
     public void diffentDialog(View view) {
         startActivity(new Intent(this, DiffentDialogActivity.class));
     }
+
+    public void diffentDialog2(View view) {
+        startActivity(new Intent(this, DatePickerTestActivity.class));
+    }
+
+    /**
+     * 新架构弹窗组件演示
+     *
+     * @param view
+     */
+    public void dialogDemo(View view) {
+        startActivity(new Intent(this, DialogDemoActivity.class));
+    }
+
+
 }

@@ -31,10 +31,10 @@
 2.Activity或者Fragment中使用
 ```java
   //普通弹窗效果演示
-  new XDialog.Builder(getSupportFragmentManager())
-          .setLayoutRes(R.layout.dialog_click)
-          .setDialogView(view)
-          .create()
+  new XDialogBuilder(getSupportFragmentManager())
+          .layout(R.layout.dialog_click)
+          .view(view)
+          .build()
           .show();
 ```
 
@@ -83,7 +83,7 @@ public void shareDialog(View view) {
 
 #### 框架原理解析
 XDialog的实现原理主要分为三步
-1. 实例化XDialog.Builer对象builder,然后调用各种setXXX()方法设置数据,设置的数据都保存在XController.XParams实例中
-2. create()方法调用后才会实例化XDialog对象,并将XController.TParams中设置的数据传递到XDialog的属性XController对象中
+1. 实例化XDialogBuilder对象builder,然后调用各种setXXX()方法设置数据,设置的数据都保存在TParams实例中
+2. build()方法调用后才会实例化XDialog对象,并将TParams中设置的数据传递到XDialog的属性XController对象中
 3. show()方法调用显示弹窗
 

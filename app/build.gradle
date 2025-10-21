@@ -1,15 +1,21 @@
-apply plugin: 'com.android.application'
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+}
 
 android {
-    compileSdkVersion 29
+    namespace 'com.cl.dialog'
+    compileSdk 36
+    
     defaultConfig {
         applicationId "com.cl.xdialog"
-        minSdkVersion 16
-        targetSdkVersion 29
+        minSdk 24
+        targetSdk 36
         versionCode 316
         versionName "3.1.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -18,25 +24,28 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
-
-
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-//    implementation project(':xdialog')
-    implementation 'com.github.cl-6666:xDialog:v3.1.9'
     //内存泄漏检测
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
 
+    implementation project(':xdialog')
+
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
 }

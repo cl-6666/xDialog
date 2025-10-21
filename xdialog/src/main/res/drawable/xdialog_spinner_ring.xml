@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- 背景圆环 -->
+    <item>
+        <shape android:shape="ring"
+            android:innerRadiusRatio="3"
+            android:thicknessRatio="8"
+            android:useLevel="false">
+            <solid android:color="#1A007AFF" />
+        </shape>
+    </item>
+    
+    <!-- 前景圆弧 -->
+    <item android:top="2dp" android:bottom="2dp" android:left="2dp" android:right="2dp">
+        <shape android:shape="ring"
+            android:innerRadiusRatio="3"
+            android:thicknessRatio="8"
+            android:useLevel="true">
+            <gradient
+                android:type="sweep"
+                android:startColor="#FF007AFF"
+                android:centerColor="#80007AFF"
+                android:endColor="#00007AFF" />
+        </shape>
+    </item>
+    
+</layer-list>

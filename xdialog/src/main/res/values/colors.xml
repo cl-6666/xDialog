@@ -4,4 +4,11 @@
     <color name="x_wheel_selected_text_color">#1db0b8</color>
     <color name="x_wheel_highlight_color">#00000000</color>
     <color name="x_wheel_divider_color">#80808080</color>
+    
+    <!-- 日期选择弹窗颜色 -->
+    <color name="x_dialog_title_color">#333333</color>
+    <color name="x_dialog_btn_cancel_text_color">#666666</color>
+    <color name="x_dialog_btn_confirm_text_color">#FFFFFF</color>
+    <color name="x_dialog_bg_color">#FFFFFF</color>
+    <color name="x_dialog_primary_color">#1db0b8</color>
 </resources>

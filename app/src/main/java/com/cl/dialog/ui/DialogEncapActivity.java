@@ -8,13 +8,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.cl.dialog.R;
-import com.cl.xdialog.XDialog;
-import com.cl.xdialog.base.BindViewHolder;
-import com.cl.xdialog.base.XBaseAdapter;
-import com.cl.xdialog.list.XListDialog;
-import com.cl.xdialog.listener.OnAdapterItemClickListener;
-import com.cl.xdialog.listener.OnBindViewListener;
-import com.cl.xdialog.listener.OnViewClickListener;
+import com.cl.xdialog.XDialogOptimized;
+import com.cl.xdialog.base.OptimizedViewHolder;
+import com.cl.xdialog.adapter.XOptimizedAdapter;
+import com.cl.xdialog.XListDialogOptimized;
+import com.cl.xdialog.listener.OnOptimizedAdapterItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,34 +32,26 @@ public class DialogEncapActivity extends AppCompatActivity {
      * 展示Dialog
      */
     public void showTDialog(View view) {
-        new XDialog.Builder(getSupportFragmentManager())
-                .setLayoutRes(R.layout.dialog_click)
-                .setScreenWidthAspect(DialogEncapActivity.this, 0.8f)
-                .setTag("DialogTest")
-                .setDimAmount(0.6f)
-                .setGravity(Gravity.CENTER)
-                .setOnBindViewListener(new OnBindViewListener() {
-                    @Override
-                    public void bindView(BindViewHolder bindViewHolder) {
-                        bindViewHolder.setText(R.id.tv_content, "abcdef");
-                    }
+        XDialogOptimized.create(getSupportFragmentManager())
+                .layout(R.layout.dialog_click)
+                .widthPercent(DialogEncapActivity.this, 0.8f)
+                .tag("DialogTest")
+                .dimAmount(0.6f)
+                .gravity(Gravity.CENTER)
+                .onBind(bindViewHolder -> {
+                    bindViewHolder.setText(R.id.tv_content, "abcdef");
+                    return null;
                 })
-                .addOnClickListener(R.id.btn_right, R.id.tv_title)
-                .setOnViewClickListener(new OnViewClickListener() {
-                    @Override
-                    public void onViewClick(BindViewHolder viewHolder, View view1, XDialog tDialog) {
-                        switch (view1.getId()) {
-                            case R.id.btn_right:
-                                Toast.makeText(DialogEncapActivity.this, "btn_right", Toast.LENGTH_SHORT).show();
-                                tDialog.dismiss();
-                                break;
-                            case R.id.tv_title:
-                                Toast.makeText(DialogEncapActivity.this, "tv_title", Toast.LENGTH_SHORT).show();
-                                break;
-                        }
+                .onClick(new int[]{R.id.btn_right, R.id.tv_title}, (XDialogOptimized.ViewHolder viewHolder, View view1, XDialogOptimized dialog) -> {
+                    int id = view1.getId();
+                    if (id == R.id.btn_right) {
+                        Toast.makeText(DialogEncapActivity.this, "btn_right", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    } else if (id == R.id.tv_title) {
+                        Toast.makeText(DialogEncapActivity.this, "tv_title", Toast.LENGTH_SHORT).show();
                     }
+                    return null;
                 })
-                .create()
                 .show();
     }
 
@@ -71,28 +61,27 @@ public class DialogEncapActivity extends AppCompatActivity {
             datas.add("item:" + i);
         }
 
-        XListDialog.Builder builder = new XListDialog.Builder(getSupportFragmentManager());
-        builder.setLayoutRes(R.layout.dialog_recycler_test);
-        builder.setHeight(600);
-        builder.setScreenWidthAspect(DialogEncapActivity.this, 1.0f);
-        builder.setAdapter(new XBaseAdapter<String>(R.layout.item_simple_text, datas) {
-            @Override
-            protected void onBind(BindViewHolder holder, int position, String item) {
-                holder.setText(R.id.tv, item);
-            }
-        });
-        builder.setOnAdapterItemClickListener(new OnAdapterItemClickListener() {
-            @Override
-            public void onItemClick(BindViewHolder holder, int position, Object o, XDialog tDialog) {
-                String item = (String) o;
-                Toast.makeText(DialogEncapActivity.this, "pos:" + position + "," + item, Toast.LENGTH_SHORT).show();
-                tDialog.dismiss();
-            }
-        });
-        builder.setGravity(Gravity.BOTTOM);
-
-        XDialog tListDialog = builder.create();
-        tListDialog.show();
+        XListDialogOptimized.create(getSupportFragmentManager())
+                .layout(R.layout.dialog_recycler_test)
+                .recyclerViewId(R.id.recycler_view)
+                .height(600)
+                .widthPercent(DialogEncapActivity.this, 1.0f)
+                .optimizedAdapter(new XOptimizedAdapter<String>(R.layout.item_simple_text, datas) {
+                    @Override
+                    protected void onBind(OptimizedViewHolder holder, int position, String item) {
+                        holder.setText(R.id.tv, item);
+                    }
+                })
+                .onOptimizedItemClick(new OnOptimizedAdapterItemClickListener<String>() {
+                    @Override
+                    public void onItemClick(OptimizedViewHolder holder, int position, String o, XDialogOptimized dialog) {
+                        String item = (String) o;
+                        Toast.makeText(DialogEncapActivity.this, "pos:" + position + "," + item, Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                })
+                .gravity(Gravity.BOTTOM)
+                .show();
     }
 
 
