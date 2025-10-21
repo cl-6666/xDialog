@@ -30,18 +30,9 @@ xDialog 是一个功能强大、高性能的 Android 弹窗框架，提供了丰
 
 ```gradle
 dependencies {
-    implementation 'com.cl.xdialog:xdialog:3.1.6'
+    implementation 'com.github.cl-6666:xDialog:v4.0.0'
+
 }
-```
-
-### Maven 依赖
-
-```xml
-<dependency>
-    <groupId>com.cl.xdialog</groupId>
-    <artifactId>xdialog</artifactId>
-    <version>3.1.6</version>
-</dependency>
 ```
 
 ## 🚀 快速开始
