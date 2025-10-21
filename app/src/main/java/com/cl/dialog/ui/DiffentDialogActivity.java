@@ -94,7 +94,6 @@ public class DiffentDialogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_diffent_dialog);
         //创建Handler
         handler = new MyHandler(this);
-
     }
 
     @Override
