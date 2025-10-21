@@ -16,6 +16,12 @@ xDialog 是一个功能强大、高性能的 Android 弹窗框架，提供了丰
 - 🌍 **多语言支持** - 内置国际化支持
 - 💾 **内存优化** - 自动资源清理和生命周期管理
 
+
+## 📖 版本说明
+
+- **当前版本**: 4.0.0 (推荐) - 全新架构，功能强大
+- **历史版本**: [3.1.7版本文档](README_Dialog.md) - 稳定版本
+
 ## 📦 安装
 
 ### Gradle 依赖
@@ -845,40 +851,10 @@ class ViewBindingDialog : XDialogOptimized() {
 }
 ```
 
-## 📄 许可证
+### 博客地址  
+https://blog.csdn.net/a214024475/article/details/100926426
 
-```
-Copyright 2024 xDialog
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
-
-## 🤝 贡献
-
-欢迎提交 Issue 和 Pull Request！
-
-1. Fork 本仓库
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启 Pull Request
-
-## 📞 联系我们
-
-- 作者：chenli
-- 邮箱：your.email@example.com
-- GitHub：https://github.com/chenli/xDialog
-
----
+#### QQ 群：458173716  
+<img src="https://github.com/cl-6666/serialPort/blob/master/img/qq2.jpg" width="350" height="560" alt="演示"/>  
 
 ⭐ 如果这个项目对你有帮助，请给我们一个 Star！
