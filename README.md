@@ -570,42 +570,10 @@ object DialogPluginManager {
 }
 ```
 
-### 5. 集成指南
 
 #### 5.1 项目配置
 
-**1. 添加依赖**
-
-在 `app/build.gradle` 中添加：
-
-```gradle
-android {
-    compileSdk 34
-    
-    defaultConfig {
-        minSdk 24
-        targetSdk 34
-    }
-    
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-}
-
-dependencies {
-    implementation 'com.cl.xdialog:xdialog:3.1.6'
-    
-    // 可选：如果需要使用日期选择器的高级功能
-    implementation 'androidx.fragment:fragment-ktx:1.6.2'
-}
-```
-
-**2. 混淆配置**
+**1. 混淆配置**
 
 在 `proguard-rules.pro` 中添加：
 
@@ -618,34 +586,8 @@ dependencies {
 -keep class * extends com.cl.xdialog.XDialogOptimized { *; }
 ```
 
-#### 5.2 初始化配置
 
-```kotlin
-class MyApplication : Application() {
-    
-    override fun onCreate() {
-        super.onCreate()
-        
-        // 初始化 xDialog（可选）
-        initXDialog()
-    }
-    
-    private fun initXDialog() {
-        // 设置全局默认配置
-        XDialogOptimized.setGlobalConfig {
-            dimAmount = 0.6f
-            cancelableOutside = true
-            animation = R.style.DialogFadeAnimation
-        }
-        
-        // 注册自定义插件
-        DialogPluginManager.registerPlugin(ImagePickerPlugin())
-        DialogPluginManager.registerPlugin(VideoPlayerPlugin())
-    }
-}
-```
-
-#### 5.3 最佳实践
+#### 5.2 最佳实践
 
 **1. 内存管理**
 
@@ -713,29 +655,6 @@ class StatefulDialog : XDialogOptimized() {
 }
 ```
 
-## 🔧 版本兼容性
-
-| xDialog 版本 | Android API | Kotlin 版本 | 说明 |
-|-------------|-------------|-------------|------|
-| 3.1.6 | 24+ | 1.8.0+ | 当前版本，支持所有功能 |
-| 3.0.x | 21+ | 1.7.0+ | 稳定版本，推荐使用 |
-| 2.x.x | 19+ | 1.6.0+ | 旧版本，仅维护 |
-
-**迁移指南：**
-
-从 2.x 版本升级到 3.x 版本：
-
-```kotlin
-// 2.x 版本写法
-XDialog.builder(this)
-    .setLayoutRes(R.layout.dialog_custom)
-    .show()
-
-// 3.x 版本写法
-XDialogOptimized.create(supportFragmentManager)
-    .layout(R.layout.dialog_custom)
-    .show()
-```
 
 ## ❓ 常见问题
 
