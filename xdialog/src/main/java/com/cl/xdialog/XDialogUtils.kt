@@ -173,6 +173,39 @@ object XDialogUtils {
     }
 
     /**
+     * 创建简单列表对话框（使用默认样式，无需提供列表布局）
+     * 只需要提供Item布局和TextView ID
+     */
+    @JvmStatic
+    fun <T> simpleList(
+        fragmentManager: FragmentManager,
+        items: List<T>,
+        itemLayoutRes: Int,
+        itemTextViewId: Int,
+        onItemClick: (position: Int, item: T) -> Unit
+    ): XListDialogOptimized {
+        val adapter = object : com.cl.xdialog.adapter.XOptimizedAdapter<T>(
+            itemLayoutRes,
+            items
+        ) {
+            override fun onBind(holder: OptimizedViewHolder, position: Int, item: T) {
+                holder.setText(itemTextViewId, item.toString())
+            }
+        }
+
+        return XListDialogOptimized.create(fragmentManager)
+            // 不设置layout和recyclerViewId，使用默认生成的RecyclerView
+            .optimizedAdapter(adapter)
+            .onOptimizedItemClick(object : com.cl.xdialog.listener.OnOptimizedAdapterItemClickListener<T> {
+                override fun onItemClick(holder: OptimizedViewHolder?, position: Int, item: T, dialog: com.cl.xdialog.XDialogOptimized?) {
+                    onItemClick(position, item)
+                    dialog?.dismiss()
+                }
+            })
+            .show()
+    }
+
+    /**
      * 创建列表选择对话框
      * 注意：需要用户提供布局资源
      */

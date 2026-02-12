@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -44,6 +45,40 @@ open class XDialogOptimized : DialogFragment(), DefaultLifecycleObserver {
         fun create(fragmentManager: FragmentManager): Builder {
             return Builder(fragmentManager)
         }
+
+        internal fun showAuto(
+            fragmentManager: FragmentManager,
+            dialog: DialogFragment,
+            tag: String?
+        ): DialogFragment {
+            if (!fragmentManager.isStateSaved) {
+                dialog.show(fragmentManager, tag)
+                return dialog
+            }
+            if (fragmentManager.isDestroyed) {
+                return dialog
+            }
+            val callback = object : FragmentManager.FragmentLifecycleCallbacks() {
+                private fun attemptShow(fm: FragmentManager) {
+                    if (!fm.isStateSaved && !dialog.isAdded) {
+                        dialog.show(fm, tag)
+                    }
+                    if (!fm.isStateSaved) {
+                        fm.unregisterFragmentLifecycleCallbacks(this)
+                    }
+                }
+
+                override fun onFragmentStarted(fm: FragmentManager, f: Fragment) {
+                    attemptShow(fm)
+                }
+
+                override fun onFragmentResumed(fm: FragmentManager, f: Fragment) {
+                    attemptShow(fm)
+                }
+            }
+            fragmentManager.registerFragmentLifecycleCallbacks(callback, true)
+            return dialog
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,12 +99,16 @@ open class XDialogOptimized : DialogFragment(), DefaultLifecycleObserver {
         savedInstanceState: Bundle?
     ): View? {
         contextRef = WeakReference(requireContext())
-        
-        return when {
-            config.customView != null -> config.customView
-            config.layoutRes > 0 -> inflater.inflate(config.layoutRes, container, false)
-            else -> throw IllegalStateException("必须设置布局资源或自定义View")
+
+        val customView = config.customView
+        if (customView != null) {
+            (customView.parent as? ViewGroup)?.removeView(customView)
+            return customView
         }
+        if (config.layoutRes > 0) {
+            return inflater.inflate(config.layoutRes, container, false)
+        }
+        throw IllegalStateException("必须设置布局资源或自定义View")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -114,6 +153,17 @@ open class XDialogOptimized : DialogFragment(), DefaultLifecycleObserver {
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
         config.dismissListener?.onDismiss(dialog)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        config.bindListener = null
+        config.clickListener = null
+        config.dismissListener = null
+        config.keyListener = null
+        config.clickIds.clear()
+        config.customView = null
+        clearResources()
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
@@ -181,8 +231,16 @@ open class XDialogOptimized : DialogFragment(), DefaultLifecycleObserver {
             config.width = width
         }
 
+        fun widthDp(dp: Int) = apply {
+            config.width = (dp * android.content.res.Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+        }
+
         fun height(height: Int) = apply {
             config.height = height
+        }
+
+        fun heightDp(dp: Int) = apply {
+            config.height = (dp * android.content.res.Resources.getSystem().displayMetrics.density + 0.5f).toInt()
         }
 
         fun widthPercent(context: Context, percent: Float) = apply {
@@ -235,7 +293,7 @@ open class XDialogOptimized : DialogFragment(), DefaultLifecycleObserver {
          */
         fun show(): XDialogOptimized {
             val dialog = build()
-            dialog.show(fragmentManager, this.config.tag.takeIf { it.isNotEmpty() })
+            showAuto(fragmentManager, dialog, this.config.tag.takeIf { it.isNotEmpty() })
             return dialog
         }
 
@@ -254,6 +312,9 @@ open class XDialogOptimized : DialogFragment(), DefaultLifecycleObserver {
      */
     class ViewHolder(private val rootView: View, private val dialog: XDialogOptimized) {
         
+        /**
+         * 查找视图（带缓存）
+         */
         fun <T : View> findViewById(id: Int): T? {
             // 优先从缓存获取
             dialog.getCachedView<T>(id)?.let { return it }
@@ -264,18 +325,145 @@ open class XDialogOptimized : DialogFragment(), DefaultLifecycleObserver {
             }
         }
 
-        fun setText(id: Int, text: CharSequence) {
+        /**
+         * 设置文本
+         */
+        fun setText(id: Int, text: CharSequence?): ViewHolder {
             findViewById<android.widget.TextView>(id)?.text = text
+            return this
         }
 
-        fun setVisibility(id: Int, visibility: Int) {
+        /**
+         * 设置文本（资源ID）
+         */
+        fun setText(id: Int, resId: Int): ViewHolder {
+            findViewById<android.widget.TextView>(id)?.setText(resId)
+            return this
+        }
+
+        /**
+         * 设置文本颜色
+         */
+        fun setTextColor(id: Int, color: Int): ViewHolder {
+            findViewById<android.widget.TextView>(id)?.setTextColor(color)
+            return this
+        }
+
+        /**
+         * 设置图片资源
+         */
+        fun setImageResource(id: Int, resId: Int): ViewHolder {
+            findViewById<android.widget.ImageView>(id)?.setImageResource(resId)
+            return this
+        }
+
+        /**
+         * 设置图片Drawable
+         */
+        fun setImageDrawable(id: Int, drawable: android.graphics.drawable.Drawable?): ViewHolder {
+            findViewById<android.widget.ImageView>(id)?.setImageDrawable(drawable)
+            return this
+        }
+
+        /**
+         * 设置图片Bitmap
+         */
+        fun setImageBitmap(id: Int, bitmap: android.graphics.Bitmap?): ViewHolder {
+            findViewById<android.widget.ImageView>(id)?.setImageBitmap(bitmap)
+            return this
+        }
+
+        /**
+         * 设置背景颜色
+         */
+        fun setBackgroundColor(id: Int, color: Int): ViewHolder {
+            findViewById<View>(id)?.setBackgroundColor(color)
+            return this
+        }
+
+        /**
+         * 设置背景资源
+         */
+        fun setBackgroundResource(id: Int, resId: Int): ViewHolder {
+            findViewById<View>(id)?.setBackgroundResource(resId)
+            return this
+        }
+
+        /**
+         * 设置可见性
+         */
+        fun setVisibility(id: Int, visibility: Int): ViewHolder {
             findViewById<View>(id)?.visibility = visibility
+            return this
         }
 
-        fun setOnClickListener(id: Int, listener: View.OnClickListener) {
+        /**
+         * 设置是否可见（VISIBLE/GONE）
+         */
+        fun setVisible(id: Int, visible: Boolean): ViewHolder {
+            findViewById<View>(id)?.visibility = if (visible) View.VISIBLE else View.GONE
+            return this
+        }
+
+        /**
+         * 获取文本内容（支持TextView/EditText/Button等）
+         */
+        fun getText(id: Int): String {
+            return findViewById<android.widget.TextView>(id)?.text?.toString() ?: ""
+        }
+
+        /**
+         * 设置提示文本（支持TextView/EditText）
+         */
+        fun setHint(id: Int, hint: CharSequence?): ViewHolder {
+            findViewById<android.widget.TextView>(id)?.hint = hint
+            return this
+        }
+
+        /**
+         * 设置提示文本（资源ID）
+         */
+        fun setHint(id: Int, resId: Int): ViewHolder {
+            findViewById<android.widget.TextView>(id)?.setHint(resId)
+            return this
+        }
+
+        /**
+         * 设置提示文本颜色
+         */
+        fun setHintTextColor(id: Int, color: Int): ViewHolder {
+            findViewById<android.widget.TextView>(id)?.setHintTextColor(color)
+            return this
+        }
+        
+        /**
+         * 设置输入类型
+         * @param type 例如: InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+         */
+        fun setInputType(id: Int, type: Int): ViewHolder {
+             findViewById<android.widget.TextView>(id)?.inputType = type
+             return this
+        }
+
+        /**
+         * 清空文本
+         */
+        fun clearText(id: Int): ViewHolder {
+            findViewById<android.widget.TextView>(id)?.text = ""
+            return this
+        }
+
+        /**
+         * 设置点击事件
+         */
+        fun setOnClickListener(id: Int, listener: View.OnClickListener): ViewHolder {
             findViewById<View>(id)?.setOnClickListener(listener)
+            return this
         }
 
+        /**
+         * 关闭弹窗
+         */
         fun dismiss() {
             dialog.dismiss()
         }

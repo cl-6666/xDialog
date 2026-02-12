@@ -346,7 +346,11 @@ class XLoadingDialog : XDialogOptimized() {
 
         fun show(): XLoadingDialog {
             val dialog = build()
-            dialog.show(fragmentManager, loadingConfig.style.name + "_" + System.currentTimeMillis())
+            XDialogOptimized.showAuto(
+                fragmentManager,
+                dialog,
+                loadingConfig.style.name + "_" + System.currentTimeMillis()
+            )
             return dialog
         }
 

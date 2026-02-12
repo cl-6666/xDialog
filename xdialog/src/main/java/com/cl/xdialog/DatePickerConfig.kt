@@ -16,8 +16,8 @@ data class DatePickerConfig(
     // 初始年份
     var initialYear: Int = Calendar.getInstance().get(Calendar.YEAR),
     
-    // 初始月份 (0-11)
-    var initialMonth: Int = Calendar.getInstance().get(Calendar.MONTH),
+    // 初始月份 (1-12)
+    var initialMonth: Int = Calendar.getInstance().get(Calendar.MONTH) + 1,
     
     // 初始日期
     var initialDay: Int = Calendar.getInstance().get(Calendar.DAY_OF_MONTH),
@@ -25,8 +25,16 @@ data class DatePickerConfig(
     // 最小年份
     var minYear: Int = 1950,
     
+    var minMonth: Int = 1,
+    
+    var minDay: Int = 1,
+    
     // 最大年份
     var maxYear: Int = 2050,
+    
+    var maxMonth: Int = 12,
+    
+    var maxDay: Int = 31,
     
     // 确认按钮文本
     var confirmText: String = "确定",
@@ -70,7 +78,7 @@ data class DatePickerConfig(
      * 获取当前月份（1-12）
      */
     fun getCurrentMonth(): Int {
-        return initialMonth + 1
+        return initialMonth
     }
     
     /**

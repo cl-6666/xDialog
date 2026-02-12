@@ -434,9 +434,9 @@ XDatePickerDialog.create(supportFragmentManager)
 
 | 参数 | 类型 | 说明 | 默认值 |
 |------|------|------|--------|
-| initialDate | (Int, Int, Int) | 初始日期（年，月，日） | 当前日期 |
-| minDate | (Int, Int, Int) | 最小日期（年，月，日） | 1900-1-1 |
-| maxDate | (Int, Int, Int) | 最大日期（年，月，日） | 2100-12-31 |
+| initialDate | (Int, Int, Int) | 初始日期（年，月，日，月为 1-12） | 当前日期 |
+| minDate | (Int, Int, Int) | 最小日期（年，月，日，月为 1-12） | 1950-1-1 |
+| maxDate | (Int, Int, Int) | 最大日期（年，月，日，月为 1-12） | 2050-12-31 |
 | title | String | 对话框标题 | "选择日期" |
 | confirmText | String | 确认按钮文字 | "确定" |
 | cancelText | String | 取消按钮文字 | "取消" |

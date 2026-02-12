@@ -61,6 +61,7 @@ class XDatePickerDialog : XDialogOptimized() {
             selectedMonth = datePickerConfig.initialMonth
             selectedDay = datePickerConfig.initialDay
         }
+        clampSelectedDate()
     }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -124,20 +125,22 @@ class XDatePickerDialog : XDialogOptimized() {
         wheelYear.onWheelChangedListener = object : OnWheelChangedListener {
             override fun onChanged(view: WheelView?, oldIndex: Int, newIndex: Int) {
                 selectedYear = datePickerConfig.minYear + newIndex
-                updateDayWheel()
+                updateMonthWheel()
             }
         }
         
         wheelMonth.onWheelChangedListener = object : OnWheelChangedListener {
             override fun onChanged(view: WheelView?, oldIndex: Int, newIndex: Int) {
-                selectedMonth = newIndex + 1
+                val minMonth = getMinMonthForYear(selectedYear)
+                selectedMonth = minMonth + newIndex
                 updateDayWheel()
             }
         }
         
         wheelDay.onWheelChangedListener = object : OnWheelChangedListener {
             override fun onChanged(view: WheelView?, oldIndex: Int, newIndex: Int) {
-                selectedDay = newIndex + 1
+                val minDay = getMinDayFor(selectedYear, selectedMonth)
+                selectedDay = minDay + newIndex
             }
         }
     }
@@ -158,42 +161,51 @@ class XDatePickerDialog : XDialogOptimized() {
      * 设置月份滚轮
      */
     private fun setupMonthWheel() {
-        val months = (1..12).map { "${it}月" }.toTypedArray()
+        val minMonth = getMinMonthForYear(selectedYear)
+        val maxMonth = getMaxMonthForYear(selectedYear)
+        val months = (minMonth..maxMonth).map { "${it}月" }.toTypedArray()
         wheelMonth.setEntries(*months)
         
         // 设置当前月份
-        wheelMonth.setCurrentIndex(selectedMonth - 1, false)
+        wheelMonth.setCurrentIndex(selectedMonth - minMonth, false)
     }
     
     /**
      * 设置日期滚轮
      */
     private fun setupDayWheel() {
-        val daysInMonth = getDaysInMonth(selectedYear, selectedMonth)
-        val days = (1..daysInMonth).map { "${it}日" }.toTypedArray()
+        val minDay = getMinDayFor(selectedYear, selectedMonth)
+        val maxDay = getMaxDayFor(selectedYear, selectedMonth)
+        val days = (minDay..maxDay).map { "${it}日" }.toTypedArray()
         wheelDay.setEntries(*days)
         
         // 确保选中的日期不超过当月最大天数
-        if (selectedDay > daysInMonth) {
-            selectedDay = daysInMonth
+        if (selectedDay < minDay) {
+            selectedDay = minDay
+        } else if (selectedDay > maxDay) {
+            selectedDay = maxDay
         }
         
         // 设置当前日期
-        wheelDay.setCurrentIndex(selectedDay - 1, false)
+        wheelDay.setCurrentIndex(selectedDay - minDay, false)
     }
     
     /**
      * 更新日期滚轮（当年份或月份改变时）
      */
     private fun updateDayWheel() {
-        val daysInMonth = getDaysInMonth(selectedYear, selectedMonth)
-        val days = (1..daysInMonth).map { "${it}日" }.toTypedArray()
+        val minDay = getMinDayFor(selectedYear, selectedMonth)
+        val maxDay = getMaxDayFor(selectedYear, selectedMonth)
+        val days = (minDay..maxDay).map { "${it}日" }.toTypedArray()
         wheelDay.setEntries(*days)
         
         // 确保选中的日期不超过当月最大天数
-        if (selectedDay > daysInMonth) {
-            selectedDay = daysInMonth
-            wheelDay.setCurrentIndex(selectedDay - 1, true)
+        if (selectedDay < minDay) {
+            selectedDay = minDay
+            wheelDay.setCurrentIndex(selectedDay - minDay, true)
+        } else if (selectedDay > maxDay) {
+            selectedDay = maxDay
+            wheelDay.setCurrentIndex(selectedDay - minDay, true)
         }
     }
     
@@ -204,6 +216,63 @@ class XDatePickerDialog : XDialogOptimized() {
         val calendar = Calendar.getInstance()
         calendar.set(year, month - 1, 1)
         return calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+    }
+
+    private fun updateMonthWheel() {
+        val minMonth = getMinMonthForYear(selectedYear)
+        val maxMonth = getMaxMonthForYear(selectedYear)
+        if (selectedMonth < minMonth) {
+            selectedMonth = minMonth
+        } else if (selectedMonth > maxMonth) {
+            selectedMonth = maxMonth
+        }
+        val months = (minMonth..maxMonth).map { "${it}月" }.toTypedArray()
+        wheelMonth.setEntries(*months)
+        wheelMonth.setCurrentIndex(selectedMonth - minMonth, false)
+        updateDayWheel()
+    }
+
+    private fun getMinMonthForYear(year: Int): Int {
+        return if (year == datePickerConfig.minYear) {
+            datePickerConfig.minMonth
+        } else {
+            1
+        }
+    }
+
+    private fun getMaxMonthForYear(year: Int): Int {
+        return if (year == datePickerConfig.maxYear) {
+            datePickerConfig.maxMonth
+        } else {
+            12
+        }
+    }
+
+    private fun getMinDayFor(year: Int, month: Int): Int {
+        return if (year == datePickerConfig.minYear && month == datePickerConfig.minMonth) {
+            datePickerConfig.minDay
+        } else {
+            1
+        }
+    }
+
+    private fun getMaxDayFor(year: Int, month: Int): Int {
+        val maxDay = getDaysInMonth(year, month)
+        return if (year == datePickerConfig.maxYear && month == datePickerConfig.maxMonth) {
+            minOf(datePickerConfig.maxDay, maxDay)
+        } else {
+            maxDay
+        }
+    }
+
+    private fun clampSelectedDate() {
+        selectedYear = selectedYear.coerceIn(datePickerConfig.minYear, datePickerConfig.maxYear)
+        val minMonth = getMinMonthForYear(selectedYear)
+        val maxMonth = getMaxMonthForYear(selectedYear)
+        selectedMonth = selectedMonth.coerceIn(minMonth, maxMonth)
+        val minDay = getMinDayFor(selectedYear, selectedMonth)
+        val maxDay = getMaxDayFor(selectedYear, selectedMonth)
+        selectedDay = selectedDay.coerceIn(minDay, maxDay)
     }
     
     /**
@@ -256,9 +325,10 @@ class XDatePickerDialog : XDialogOptimized() {
          * 设置初始日期
          */
         fun initialDate(year: Int, month: Int, day: Int): Builder {
-            config.initialYear = year
-            config.initialMonth = month
-            config.initialDay = day
+            val normalized = normalizeDate(year, month, day)
+            config.initialYear = normalized[0]
+            config.initialMonth = normalized[1]
+            config.initialDay = normalized[2]
             return this
         }
         
@@ -266,7 +336,10 @@ class XDatePickerDialog : XDialogOptimized() {
          * 设置最小年份
          */
         fun minDate(year: Int, month: Int, day: Int): Builder {
-            config.minYear = year
+            val normalized = normalizeDate(year, month, day)
+            config.minYear = normalized[0]
+            config.minMonth = normalized[1]
+            config.minDay = normalized[2]
             return this
         }
         
@@ -274,7 +347,10 @@ class XDatePickerDialog : XDialogOptimized() {
          * 设置最大年份
          */
         fun maxDate(year: Int, month: Int, day: Int): Builder {
-            config.maxYear = year
+            val normalized = normalizeDate(year, month, day)
+            config.maxYear = normalized[0]
+            config.maxMonth = normalized[1]
+            config.maxDay = normalized[2]
             return this
         }
         
@@ -285,6 +361,15 @@ class XDatePickerDialog : XDialogOptimized() {
             config.minYear = startYear
             config.maxYear = endYear
             return this
+        }
+
+        private fun normalizeDate(year: Int, month: Int, day: Int): IntArray {
+            val safeMonth = month.coerceIn(1, 12)
+            val calendar = Calendar.getInstance()
+            calendar.set(year, safeMonth - 1, 1)
+            val maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+            val safeDay = day.coerceIn(1, maxDay)
+            return intArrayOf(year, safeMonth, safeDay)
         }
         
         /**
@@ -360,7 +445,7 @@ class XDatePickerDialog : XDialogOptimized() {
          */
         fun show(): XDatePickerDialog {
             val dialog = build()
-            dialog.show(fragmentManager, "XDatePickerDialog")
+            XDialogOptimized.showAuto(fragmentManager, dialog, "XDatePickerDialog")
             return dialog
         }
         

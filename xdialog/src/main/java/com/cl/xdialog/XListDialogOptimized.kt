@@ -1,5 +1,6 @@
 package com.cl.xdialog
 
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +22,36 @@ class XListDialogOptimized : XDialogOptimized() {
         fun create(fragmentManager: FragmentManager): ListBuilder {
             return ListBuilder(fragmentManager)
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateView(
+        inflater: android.view.LayoutInflater,
+        container: android.view.ViewGroup?,
+        savedInstanceState: android.os.Bundle?
+    ): View? {
+        // 如果未设置布局资源和自定义View，则自动创建一个包含RecyclerView的布局
+        if (config.layoutRes <= 0 && config.customView == null) {
+            val context = requireContext()
+            val rv = RecyclerView(context)
+            rv.layoutParams = android.view.ViewGroup.LayoutParams(
+                android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+                android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            
+            // 如果未设置ID，生成一个
+            if (listConfig.recyclerViewId <= 0) {
+                rv.id = View.generateViewId()
+                listConfig.recyclerViewId = rv.id
+            } else {
+                rv.id = listConfig.recyclerViewId
+            }
+            return rv
+        }
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: android.os.Bundle?) {
@@ -132,7 +163,11 @@ class XListDialogOptimized : XDialogOptimized() {
          */
         fun show(): XListDialogOptimized {
             val dialog = build()
-            dialog.show(fragmentManager, dialogBuilder.config.tag.takeIf { it.isNotEmpty() })
+            XDialogOptimized.showAuto(
+                fragmentManager,
+                dialog,
+                dialogBuilder.config.tag.takeIf { it.isNotEmpty() }
+            )
             return dialog
         }
 
