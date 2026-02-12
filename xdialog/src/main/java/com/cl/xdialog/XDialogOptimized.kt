@@ -2,6 +2,8 @@ package com.cl.xdialog
 
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.SparseArray
 import android.view.Gravity
@@ -46,7 +48,7 @@ open class XDialogOptimized : DialogFragment(), DefaultLifecycleObserver {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super<DialogFragment>.onCreate(savedInstanceState)
-        
+
         // 恢复配置
         savedInstanceState?.let {
             config = it.getParcelable(KEY_CONFIG) ?: DialogConfig()
@@ -92,7 +94,7 @@ open class XDialogOptimized : DialogFragment(), DefaultLifecycleObserver {
 
     override fun onStart() {
         super<DialogFragment>.onStart()
-        
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.apply {
             // 设置窗口属性
             attributes = attributes.apply {

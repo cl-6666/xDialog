@@ -1,12 +1,11 @@
 package com.cl.xdialog.adapter
 
-import android.util.SparseArray
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.cl.xdialog.XDialogOptimized
+import com.cl.xdialog.base.OptimizedViewHolder
 import com.cl.xdialog.listener.OnOptimizedAdapterItemClickListener
 import java.lang.ref.WeakReference
 
@@ -22,7 +21,7 @@ abstract class XOptimizedAdapter<T> @JvmOverloads constructor(
     @LayoutRes private val layoutRes: Int,
     private val data: List<T>,
     @LayoutRes private val emptyLayoutRes: Int? = null
-) : RecyclerView.Adapter<XOptimizedAdapter.OptimizedViewHolder>() {
+) : RecyclerView.Adapter<OptimizedViewHolder>() {
 
     private var dialogRef: WeakReference<XDialogOptimized>? = null
     private var itemClickListener: OnOptimizedAdapterItemClickListener<T>? = null
@@ -57,7 +56,7 @@ abstract class XOptimizedAdapter<T> @JvmOverloads constructor(
                 // 设置点击监听
                 holder.itemView.setOnClickListener {
                     itemClickListener?.onItemClick(
-                        com.cl.xdialog.base.OptimizedViewHolder(holder.itemView),
+                        holder,
                         position,
                         item,
                         dialogRef?.get()
@@ -128,70 +127,4 @@ abstract class XOptimizedAdapter<T> @JvmOverloads constructor(
      * 检查是否为空
      */
     val isEmpty: Boolean get() = data.isEmpty()
-
-    /**
-     * 优化的ViewHolder
-     */
-    class OptimizedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val viewCache = SparseArray<View>()
-
-        /**
-         * 高性能的findViewById，带缓存
-         */
-        fun <V : View> findViewById(id: Int): V? {
-            var view = viewCache.get(id)
-            if (view == null) {
-                view = itemView.findViewById(id)
-                if (view != null) {
-                    viewCache.put(id, view)
-                }
-            }
-            @Suppress("UNCHECKED_CAST")
-            return view as? V
-        }
-
-        /**
-         * 设置文本
-         */
-        fun setText(id: Int, text: CharSequence?) {
-            findViewById<android.widget.TextView>(id)?.text = text
-        }
-
-        /**
-         * 设置图片资源
-         */
-        fun setImageResource(id: Int, resId: Int) {
-            findViewById<android.widget.ImageView>(id)?.setImageResource(resId)
-        }
-
-        /**
-         * 设置可见性
-         */
-        fun setVisibility(id: Int, visibility: Int) {
-            findViewById<View>(id)?.visibility = visibility
-        }
-
-        /**
-         * 设置点击监听
-         */
-        fun setOnClickListener(id: Int, listener: View.OnClickListener?) {
-            findViewById<View>(id)?.setOnClickListener(listener)
-        }
-
-        /**
-         * 设置背景
-         */
-        fun setBackgroundResource(id: Int, resId: Int) {
-            findViewById<View>(id)?.setBackgroundResource(resId)
-        }
-
-        /**
-         * 清理缓存
-         */
-        fun clearCache() {
-            viewCache.clear()
-        }
-
-
-    }
 }

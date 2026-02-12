@@ -34,6 +34,13 @@ class OptimizedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     /**
+     * 兼容旧API
+     */
+    fun <V : View> findViewById(id: Int): V? {
+        return getView(id)
+    }
+
+    /**
      * 设置文本
      */
     fun setText(id: Int, text: CharSequence?) {

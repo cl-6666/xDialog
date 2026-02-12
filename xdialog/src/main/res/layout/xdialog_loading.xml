@@ -2,12 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/xdialog_loading_bg"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="24dp"
-    android:minWidth="120dp"
-    android:minHeight="120dp">
+    android:paddingHorizontal="30dp"
+    android:paddingVertical="20dp"
+    android:background="@drawable/xdialog_loading_bg2">
 
     <!-- 加载动画容器 -->
     <FrameLayout
@@ -16,45 +15,23 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center">
 
-        <!-- 默认旋转圆圈 -->
-        <ProgressBar
-            android:id="@+id/xdialog_loading_spinner"
+        <!-- 通用图标容器 (用于显示图片或自定义Drawable) -->
+        <ImageView
+            android:id="@+id/xdialog_loading_icon"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="center"
-            android:indeterminateDrawable="@drawable/xdialog_loading_spinner"
-            android:visibility="visible" />
+            android:scaleType="fitCenter"
+            android:visibility="gone" />
 
-        <!-- 自定义点动画 -->
-        <LinearLayout
-            android:id="@+id/xdialog_loading_dots"
+        <!-- 自定义视图容器 (用于动态添加View) -->
+        <FrameLayout
+            android:id="@+id/xdialog_loading_custom_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:visibility="gone" />
 
-            <View
-                android:id="@+id/xdialog_dot1"
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:layout_marginEnd="4dp"
-                android:background="@drawable/xdialog_loading_dot" />
-
-            <View
-                android:id="@+id/xdialog_dot2"
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:layout_marginEnd="4dp"
-                android:background="@drawable/xdialog_loading_dot" />
-
-            <View
-                android:id="@+id/xdialog_dot3"
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:background="@drawable/xdialog_loading_dot" />
-
-        </LinearLayout>
 
         <!-- 进度条 -->
         <ProgressBar
@@ -68,6 +45,8 @@
             android:max="100"
             android:progress="0" />
 
+
+
     </FrameLayout>
 
     <!-- 加载文本 -->
@@ -77,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="加载中..."
-        android:textColor="#FF333333"
+        android:textColor="@color/x_dialog_btn_confirm_text_color"
         android:textSize="14sp"
         android:gravity="center"
         android:maxLines="2"

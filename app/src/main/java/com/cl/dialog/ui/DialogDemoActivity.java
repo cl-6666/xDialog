@@ -73,6 +73,7 @@ public class DialogDemoActivity extends AppCompatActivity {
     public void showBasicModal(View view) {
         XDialogOptimized.create(getSupportFragmentManager())
                 .layout(R.layout.dialog_simple)
+                .widthPercent(this, 0.7f)
                 .onBind(viewHolder -> {
                     viewHolder.setText(R.id.tv_title, "基础弹窗");
                     viewHolder.setText(R.id.tv_content, "这是一个基础的模态弹窗示例，采用新架构实现。\n\n特点：\n• 居中显示\n• 支持点击外部关闭\n• 统一的视觉风格");
@@ -158,87 +159,82 @@ public class DialogDemoActivity extends AppCompatActivity {
      * 加载中状态弹窗演示 - 展示多种加载样式
      */
     public void showLoadingDialog(View view) {
-        // 演示1: 旋转圆圈样式
-        showSpinnerLoading();
+        // 演示1: 脉冲动画样式 (内置样式1)
+        showPulseLoading();
         
         // 延迟演示其他样式
         mainHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                showDotsLoading();
+                // 演示2: 翻转动画样式 (内置样式2)
+                showFlipLoading();
             }
         }, 3500);
-        
+
         mainHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                // 演示4: 进度条样式 (内置样式5)
                 showProgressLoading();
             }
         }, 7000);
-    }
-    
-    /**
-     * 演示旋转圆圈加载样式
-     */
-    private void showSpinnerLoading() {
-        XLoadingDialog spinnerDialog = XLoadingDialog.create(getSupportFragmentManager())
-                .style(XLoadingDialog.LoadingStyle.SPINNER)
-                .message("正在加载数据...")
-                .primaryColor(0xFF007AFF)
-                .textColor(0xFF333333)
-                .cancelableOutside(false)
-                .show();
-        
-        // 3秒后自动关闭
+
         mainHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (spinnerDialog.isVisible()) {
-                    spinnerDialog.dismiss();
-                    showToast("旋转圆圈加载完成");
-                }
+                // 演示5: 可配置演示 (黑色主题)
+                showDarkLoading();
+            }
+        }, 10500);
+    }
+    
+    /**
+     * 演示加载样式1 (内置样式1)
+     */
+    private void showPulseLoading() {
+        XLoadingDialog pulseDialog = XLoadingDialog.create(getSupportFragmentManager())
+                .style(XLoadingDialog.LoadingStyle.STYLE1) // 使用内置STYLE1样式
+                .message("正在处理 (样式1)...")
+                .show();
+        
+        // 3秒后自动关闭
+        mainHandler.postDelayed(() -> {
+            if (pulseDialog.isVisible()) {
+                pulseDialog.dismiss();
+                showToast("样式1加载完成");
             }
         }, 3000);
     }
     
     /**
-     * 演示点动画加载样式
+     * 演示加载样式2 (内置样式2)
      */
-    private void showDotsLoading() {
-        XLoadingDialog dotsDialog = XLoadingDialog.create(getSupportFragmentManager())
-                .style(XLoadingDialog.LoadingStyle.DOTS)
-                .message("处理中...")
-                .primaryColor(0xFF00C7FF)
-                .textColor(0xFF666666)
-                .textSize(16f)
-                .cancelableOutside(false)
+    private void showFlipLoading() {
+        XLoadingDialog flipDialog = XLoadingDialog.create(getSupportFragmentManager())
+                .style(XLoadingDialog.LoadingStyle.STYLE2) // 使用内置STYLE2样式
+                .message("正在同步 (样式2)...")
                 .show();
         
         // 3秒后自动关闭
-        mainHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (dotsDialog.isVisible()) {
-                    dotsDialog.dismiss();
-                    showToast("点动画加载完成");
-                }
+        mainHandler.postDelayed(() -> {
+            if (flipDialog.isVisible()) {
+                flipDialog.dismiss();
+                showToast("样式2加载完成");
             }
         }, 3000);
     }
     
     /**
-     * 演示进度条加载样式
+     * 演示进度条加载样式 (内置样式5)
      */
     private void showProgressLoading() {
         XLoadingDialog progressDialog = XLoadingDialog.create(getSupportFragmentManager())
                 .style(XLoadingDialog.LoadingStyle.PROGRESS)
-                .message("下载中...")
+                .message("下载中 (样式5)...")
                 .progress(0)
                 .maxProgress(100)
                 .progressWidth(300)
                 .primaryColor(0xFF34C759)
-                .textColor(0xFF333333)
-                .cancelableOutside(false)
                 .show();
         
         // 模拟进度更新
@@ -277,6 +273,33 @@ public class DialogDemoActivity extends AppCompatActivity {
         };
         
         mainHandler.postDelayed(updateProgress, 300);
+    }
+
+
+
+    /**
+     * 演示黑色背景加载样式
+     */
+    private void showDarkLoading() {
+        XLoadingDialog darkDialog = XLoadingDialog.create(getSupportFragmentManager())
+                .icon(R.mipmap.loading_test1)
+                .rotate(true)
+                .message("黑色主题加载...")
+                .backgroundColor(0xCC000000) // 半透明黑色背景
+                .textColor(0xFFFFFFFF)       // 白色文字
+                .cancelableOutside(false)
+                .show();
+
+        // 3秒后自动关闭
+        mainHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (darkDialog.isVisible()) {
+                    darkDialog.dismiss();
+                    showToast("黑色主题加载完成");
+                }
+            }
+        }, 3000);
     }
 
     /**

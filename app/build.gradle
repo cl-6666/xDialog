@@ -10,9 +10,9 @@ android {
     defaultConfig {
         applicationId "com.cl.xdialog"
         minSdk 24
-        targetSdk 36
-        versionCode 316
-        versionName "3.1.6"
+        targetSdk 30
+        versionCode 401
+        versionName "4.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -39,8 +39,8 @@ android {
 dependencies {
     //内存泄漏检测
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
-//    implementation project(':xdialog')
-    implementation 'com.github.cl-6666:xDialog:v4.0.0'
+    implementation project(':xdialog')
+//    implementation 'com.github.cl-6666:xDialog:v4.0.0'
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material

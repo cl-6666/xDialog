@@ -3,6 +3,8 @@ package com.cl.xdialog
 import android.content.Context
 import android.view.Gravity
 import androidx.fragment.app.FragmentManager
+import com.cl.xdialog.base.OptimizedViewHolder
+
 
 /**
  * XDialog工具类
@@ -203,7 +205,7 @@ object XDialogUtils {
             }
             .optimizedAdapter(adapter)
             .onOptimizedItemClick(object : com.cl.xdialog.listener.OnOptimizedAdapterItemClickListener<T> {
-                override fun onItemClick(holder: com.cl.xdialog.base.OptimizedViewHolder?, position: Int, item: T, dialog: com.cl.xdialog.XDialogOptimized?) {
+                override fun onItemClick(holder: OptimizedViewHolder?, position: Int, item: T, dialog: com.cl.xdialog.XDialogOptimized?) {
                     onItemClick(position, item)
                     dialog?.dismiss()
                 }

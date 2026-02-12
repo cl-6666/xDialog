@@ -76,9 +76,8 @@ val loadingDialog = XLoadingDialog.create(supportFragmentManager)
 
 // 自定义样式加载框
 XLoadingDialog.create(supportFragmentManager)
-    .style(XLoadingDialog.LoadingStyle.DOTS)
+    .style(XLoadingDialog.LoadingStyle.STYLE1)
     .message("正在处理...")
-    .primaryColor(Color.BLUE)
     .autoClose(5000) // 5秒后自动关闭
     .show()
 ```
@@ -275,15 +274,15 @@ doAsyncWork {
 #### 2.2 加载样式
 
 ```kotlin
-// 旋转圆圈样式（默认）
+// 旋转图标样式1（内置）
 XLoadingDialog.create(supportFragmentManager)
-    .style(XLoadingDialog.LoadingStyle.SPINNER)
+    .style(XLoadingDialog.LoadingStyle.STYLE1)
     .message("加载中...")
     .show()
 
-// 点动画样式
+// 旋转图标样式2（内置）
 XLoadingDialog.create(supportFragmentManager)
-    .style(XLoadingDialog.LoadingStyle.DOTS)
+    .style(XLoadingDialog.LoadingStyle.STYLE2)
     .message("正在处理...")
     .show()
 
@@ -300,7 +299,7 @@ XLoadingDialog.create(supportFragmentManager)
 
 ```kotlin
 XLoadingDialog.create(supportFragmentManager)
-    .style(XLoadingDialog.LoadingStyle.SPINNER)
+    .style(XLoadingDialog.LoadingStyle.STYLE1)
     .message("正在上传文件...")
     .size(120)                              // 加载图标大小
     .primaryColor(Color.parseColor("#007AFF")) // 主色调
@@ -345,7 +344,7 @@ handler.post(updateRunnable)
 
 | 参数 | 类型 | 说明 | 默认值 |
 |------|------|------|--------|
-| style | LoadingStyle | 加载样式 | SPINNER |
+| style | LoadingStyle | 加载样式 (ICON, STYLE1, STYLE2, PROGRESS, CUSTOM_VIEW) | ICON |
 | message | String | 加载文字 | "加载中..." |
 | size | Int | 图标大小（像素） | 144 |
 | progressWidth | Int | 进度条宽度（像素） | 240 |
