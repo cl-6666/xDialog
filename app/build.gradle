@@ -39,8 +39,8 @@ android {
 dependencies {
     //内存泄漏检测
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
-    implementation project(':xdialog')
-//    implementation 'com.github.cl-6666:xDialog:v4.0.1'
+//    implementation project(':xdialog')
+    implementation 'com.github.cl-6666:xDialog:v4.0.2'
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
