@@ -1,8 +1,5 @@
 # xDialog - Android 弹窗框架
 
-[![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=24)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Version](https://img.shields.io/badge/Version-3.1.6-orange.svg)](https://github.com/chenli/xDialog)
 
 xDialog 是一个功能强大、高性能的 Android 弹窗框架，提供了丰富的弹窗组件和灵活的扩展机制。支持基础弹窗、加载框、日期选择器等多种常用对话框，具有链式调用、内存优化、高性能渲染等特性。
 
@@ -73,6 +70,15 @@ XDialogOptimized.create(supportFragmentManager)
 ### 加载框
 
 ```kotlin
+
+    enum class LoadingStyle {
+        ICON,       // 图标(支持多种动画)
+        STYLE1,     // 内置：Logo 1 (旋转)
+        STYLE2,     // 内置：Logo 2 (旋转)
+        PROGRESS,   // 进度条
+        CUSTOM_VIEW // 自定义View
+    }
+
 // 基础加载框
 val loadingDialog = XLoadingDialog.create(supportFragmentManager)
     .message("加载中...")
@@ -84,6 +90,15 @@ XLoadingDialog.create(supportFragmentManager)
     .message("正在处理...")
     .autoClose(5000) // 5秒后自动关闭
     .show()
+//自定义样式
+        XLoadingDialog darkDialog = XLoadingDialog.create(getSupportFragmentManager())
+                .icon(R.mipmap.loading_test1)
+                .rotate(true)
+                .message("黑色主题加载...")
+                .backgroundColor(0xCC000000) // 半透明黑色背景
+                .textColor(0xFFFFFFFF)       // 白色文字
+                .cancelableOutside(false)
+                .show();
 ```
 
 ### 日期选择器
