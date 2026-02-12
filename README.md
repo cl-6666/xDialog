@@ -20,7 +20,7 @@ xDialog 是一个功能强大、高性能的 Android 弹窗框架，提供了丰
 
 ## 📖 版本说明
 
-- **当前版本**: 4.0.1 (推荐) - 全新架构，功能强大
+- **当前版本**: 4.0.2 (推荐) - 全新架构，功能强大
 - **历史版本**: [3.1.7版本文档](README_Dialog.md) - 稳定版本
 
 ## 📦 安装
@@ -31,7 +31,7 @@ xDialog 是一个功能强大、高性能的 Android 弹窗框架，提供了丰
 
 ```gradle
 dependencies {
-    implementation 'com.github.cl-6666:xDialog:v4.0.1'
+    implementation 'com.github.cl-6666:xDialog:v4.0.2'
 
 }
 ```
